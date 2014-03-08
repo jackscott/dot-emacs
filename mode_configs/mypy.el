@@ -3,12 +3,12 @@
 ;; 	   :import [ js-functions]
 ;; 	   )
 
-(defun electric-pair ()
-  "If at end of line, insert character pair without surrounding spaces.
-   Otherwise, just insert the typed character."
-  (interactive)
-  (if (eolp) (let (parens-require-spaces) (insert-pair)) 
-    (self-insert-command 1)))
+;; (defun electric-pair ()
+;;   "If at end of line, insert character pair without surrounding spaces.
+;;    Otherwise, just insert the typed character."
+;;   (interactive)
+;;   (if (eolp) (let (parens-require-spaces) (insert-pair)) 
+;;     (self-insert-command 1)))
 
 ;; python
 (require 'python)
@@ -17,11 +17,11 @@
 (setq py-load-python-mode-pymacs-p nil)
 (setq py-tab-indent t)
 (setq py-indent-honors-inline-comment t)
-(define-key python-mode-map "\"" 'electric-pair)
-(define-key python-mode-map "\'" 'electric-pair)
-(define-key python-mode-map "(" 'electric-pair)
-(define-key python-mode-map "[" 'electric-pair)
-(define-key python-mode-map "{" 'electric-pair)
+;; (define-key python-mode-map "\"" 'electric-pair)
+;; (define-key python-mode-map "\'" 'electric-pair)
+;; (define-key python-mode-map "(" 'electric-pair)
+;; (define-key python-mode-map "[" 'electric-pair)
+;; (define-key python-mode-map "{" 'electric-pair)
 (setq interpreter-mode-alist
       (cons '("python" . python-mode)
             interpreter-mode-alist)
@@ -31,33 +31,33 @@
                (set-variable 'py-smart-indentation nil)
                (set-variable 'indent-tabs-mode nil) )))
 
-(require 'jedi)
-(add-hook 'python-mode-hook 'jedi:setup)
-(setq jedi:setup-keys t)
-(setq jedi:complete-on-dot t)
+;; (require 'jedi)
+;; (add-hook 'python-mode-hook 'jedi:setup)
+;; (setq jedi:setup-keys t)
+;; (setq jedi:complete-on-dot t)
 
-(require 'elpy)
-(setq elpy-rpc-backend "jedi")
-(elpy-enable)
-(elpy-clean-modeline)
+;; (require 'elpy)
+;; (setq elpy-rpc-backend "jedi")
+;; (elpy-enable)
+;; (elpy-clean-modeline)
 
-;; (when (require 'ipython nil t)
-;;   (setq py-python-command-args '("--matplotlib" "--colors" "LightBG"))
-;;   (setq ein:use-auto-complete t)
-;;   (setq ein:use-auto-complete-superpack t)
-;;   (setq ein:use-smartrep t))
+;; ;; (when (require 'ipython nil t)
+;; ;;   (setq py-python-command-args '("--matplotlib" "--colors" "LightBG"))
+;; ;;   (setq ein:use-auto-complete t)
+;; ;;   (setq ein:use-auto-complete-superpack t)
+;; ;;   (setq ein:use-smartrep t))
 
-(require 'nose)
-(defun nosetests-all-virtualenv ()
-  (interactive)
-  (let ((nose-global-name
-         (format
-          "~/.virtualenvs/%s/bin/nosetests"
-          (car
-           (last
-            (delete
-             ""
-             (split-string
-              (nose-find-project-root)
-              "/")))))))
-    (nosetests-all)))
+;; (require 'nose)
+;; (defun nosetests-all-virtualenv ()
+;;   (interactive)
+;;   (let ((nose-global-name
+;;          (format
+;;           "~/.virtualenvs/%s/bin/nosetests"
+;;           (car
+;;            (last
+;;             (delete
+;;              ""
+;;              (split-string
+;;               (nose-find-project-root)
+;;               "/")))))))
+;;     (nosetests-all)))
