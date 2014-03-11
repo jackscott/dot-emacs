@@ -138,13 +138,23 @@ Maps KEY to COMMAND in the keymaps listed in KEYMAPS."
 ;;(global-set-key "\C-x\C-c" 'save-buffers-kill-emacs)
 (global-set-key "\C-x]" 'slime-close-all-parens-in-sexp)
 
-(define-prefix-command 'Apropos-Prefix nil "Apropos (a,c,d,i,l,v,C-v)")
-(global-set-key (kbd "C-h C-a") 'Apropos-Prefix)
-(define-key Apropos-Prefix (kbd "a")   'apropos)
-(define-key Apropos-Prefix (kbd "C-a") 'apropos)
-(define-key Apropos-Prefix (kbd "c")   'apropos-command)
-(define-key Apropos-Prefix (kbd "d")   'apropos-documentation)
-(define-key Apropos-Prefix (kbd "i")   'info-apropos)
-(define-key Apropos-Prefix (kbd "l")   'apropos-library)
-(define-key Apropos-Prefix (kbd "v")   'apropos-variable)
-(define-key Apropos-Prefix (kbd "C-v") 'apropos-value)
+;; (define-prefix-command 'Apropos-Prefix nil "Apropos (a,c,d,i,l,v,C-v)")
+;; (global-set-key (kbd "C-h C-a") 'Apropos-Prefix)
+;; (define-key Apropos-Prefix (kbd "a")   'apropos)
+;; (define-key Apropos-Prefix (kbd "C-a") 'apropos)
+;; (define-key Apropos-Prefix (kbd "c")   'apropos-command)
+;; (define-key Apropos-Prefix (kbd "d")   'apropos-documentation)
+;; (define-key Apropos-Prefix (kbd "i")   'info-apropos)
+;; (define-key Apropos-Prefix (kbd "l")   'apropos-library)
+;; (define-key Apropos-Prefix (kbd "v")   'apropos-variable)
+;; (define-key Apropos-Prefix (kbd "C-v") 'apropos-value)
+
+;"Rebind <RET> key to do automatic indentation in certain modes (not haskell-mode)."
+;<http://www.metasyntax.net/unix/dot-emacs.html>
+(mapc
+ (lambda (mode)
+   (let ((mode-hook (intern (concat (symbol-name mode) "-hook"))))
+     (add-hook mode-hook (lambda nil (local-set-key (kbd "RET") 'newline-and-indent)))))
+ '(ada-mode c-mode c++-mode cperl-mode emacs-lisp-mode java-mode html-mode
+            lisp-mode perl-mode php-mode prolog-mode ruby-mode scheme-mode
+            sgml-mode sh-mode sml-mode tuareg-mode python-mode))

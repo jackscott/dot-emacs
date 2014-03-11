@@ -62,12 +62,3 @@
 (setq auto-mode-alist (cons '("\\.ebuild\\'" . ebuild-mode) auto-mode-alist)) 
 (setq auto-mode-alist (cons '("\\.eclass\\'" . ebuild-mode) auto-mode-alist))
 
-;"Rebind <RET> key to do automatic indentation in certain modes (not haskell-mode)."
-;<http://www.metasyntax.net/unix/dot-emacs.html>
-(mapc
- (lambda (mode)
-   (let ((mode-hook (intern (concat (symbol-name mode) "-hook"))))
-     (add-hook mode-hook (lambda nil (local-set-key (kbd "RET") 'newline-and-indent)))))
- '(ada-mode c-mode c++-mode cperl-mode emacs-lisp-mode java-mode html-mode
-            lisp-mode perl-mode php-mode prolog-mode ruby-mode scheme-mode
-            sgml-mode sh-mode sml-mode tuareg-mode python-mode))

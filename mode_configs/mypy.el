@@ -48,10 +48,6 @@
 ;; (setq ein:use-smartrep t))
 
 
-; don't split windows
-
-
-
 ;; (require 'elpy)
 ;; (setq elpy-rpc-backend "jedi")
 ;; (elpy-enable)
