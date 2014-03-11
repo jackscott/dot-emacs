@@ -84,10 +84,10 @@
       dired-recursive-copies t)
 
 ;; need to override the color coming from color-theme for some reason
-(set-face-foreground 'mode-line-buffer-id "darkblue")
+;;(set-face-foreground 'mode-line-buffer-id "darkblue")
 
 (global-hl-line-mode nil)
-(set-face-background 'hl-line "#111")
+;;(set-face-background 'hl-line "#111")
 
 
 ;"Set up highlighting of special words for selected modes."
