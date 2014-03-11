@@ -8,7 +8,7 @@ It works for me.
 
 Installation
 --------------
-You should only have to add a `load` command into your ~/.emacs file
+You should only have to add this to your ~/.emacs file
 
   $ echo '(load "~/path/to/dot-emacs/init.el")' >> ~/.emacs
 
@@ -17,5 +17,6 @@ You should only have to add a `load` command into your ~/.emacs file
 TODO
 -----
 
- * start using `namespaces` but ran into an issue when trying to import a macro.  Not sure if this is bug or not
+ * start using `namespaces` but ran into an issue when trying to import a macro.
  * Clean up everything, remove unused functions/vars
+
