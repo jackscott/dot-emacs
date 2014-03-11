@@ -1,4 +1,5 @@
-(require 'cl)
+(eval-when-compile (require 'cl))
+
 (defun homedir+ (path)
   "Return absolute path to users home directory based on environment variables"
   (format "%s/%s" (getenv "HOME") path))
@@ -20,7 +21,7 @@
 
 ;; emacs < 24 doesnt have packages functionality, load this in instead
 (if (< (string-to-number emacs-version) 24)
-  (let  ((f (emacsdir+ "package.el")))
+  (lexical-let ((f (emacsdir+ "package.el")))
     (if (file-exists-p f)
         (load f)
       '(lambda ()
@@ -34,28 +35,23 @@
 
 (package-initialize)
 
-(lexical-let ((pkgs '(namespaces auto-complete bash-completion
-				 bookmark+ clojure-mode color-theme
-				 color-theme-approximate color-theme-dawn-night
-				 color-theme-solarized color-theme-tango
-				 concurrent ctable dash deferred epc
-				 find-things-fast flymake-easy flymake-jslint
-				 flymake-python-pyflakes groovy-mode
-				 highlight-parentheses icicles json-mode
-				 logito lua-mode magit markdown-mode mmm-mode
-				 paredit pcache php+-mode php-mode popup
-				 psgml pyflakes pylint python-pep8
-				 python-pylint s slime virtualenvwrapper
-				 tangotango-theme
-                                 naquadah-theme
-                                 gist
-				 nrepl clojure-test-mode
-                                 ein
-                                 jedi nose elpy)))
-  ;;(package-refresh-contents)
-  (cl-dolist (p pkgs)
-    (if (not (package-installed-p p))
-	(package-install p))))
+;; Load in packages
+(mapc
+
+ '(lambda (pkgname)
+    (if (not (package-installed-p pkgname))
+	(package-install pkgname)))
+
+ '(namespaces auto-complete bash-completion bookmark+ clojure-mode
+	      color-theme color-theme-approximate color-theme-dawn-night
+	      color-theme-solarized color-theme-tango concurrent
+	      ctable dash deferred epc find-things-fast flymake-easy
+	      flymake-jslint flymake-python-pyflakes groovy-mode
+	      highlight-parentheses icicles json-mode logito lua-mode
+	      magit markdown-mode mmm-mode paredit pcache php+-mode php-mode
+	      popup psgml pyflakes pylint python-pep8 python-pylint s slime
+	      virtualenvwrapper tangotango-theme naquadah-theme gist
+	      nrepl clojure-test-mode ein jedi nose elpy no-easy-keys))
 
 
 (dolist (e '("functions" "visual" "keybindings"))
@@ -65,22 +61,10 @@
 (dolist (word (files-in-below-directory (concat emacs-root "mode_configs")))
   (load word))
 
-;; not everyone likes to be told what to do
-;; (require 'no-easy-keys)
-;; (no-easy-keys 1)
+(require 'no-easy-keys)
+(no-easy-keys 1)
 
-(setq-default abbrev-mode t)
-(setq abbrev-file-name (emacsdir+ "abbrev_defs.txt"))
-(define-abbrev-table 'global-abbrev-table
-  '(("afaict" "as far as I can tell" nil 1)
-    ("omuse" "http://www.emacswiki.org/cgi-bin/oddmuse.pl" nil 0)
-    ("btw" "by the way" nil 3)
-    ("wether" "whether" nil 5)
-    ("ewiki" "http://www.emacswiki.org/cgi-bin/wiki.pl" nil 3)
-    ("pov" "point of view" nil 1)
-    ))
-
-;;; Make Emacs a bitch to close (C-x C-c is sooo easy to hit):
+;;; 1 Emacs a bitch to close (C-x C-c is sooo easy to hit):
 (add-to-list 'kill-emacs-query-functions
              (lambda () (y-or-n-p "Last chance, your work would be lost. ")))
 (add-to-list 'kill-emacs-query-functions
@@ -102,7 +86,7 @@
                                   obsolete noruntime cl-functions
                                   interactive-only))
 
-
+;; compile everything below EMACS-ROOT
 (byte-recompile-directory (file-name-directory emacs-root))
 
 
