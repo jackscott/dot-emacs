@@ -55,8 +55,9 @@
 
 
 (dolist (e '("functions" "visual" "keybindings"))
-  (load e))
+  (load (concat emacs-root e)))
 
+(message (concat emacs-root "mode_configs"))
 ;; autoload all files in the mode_configs directory
 (dolist (word (files-in-below-directory (concat emacs-root "mode_configs")))
   (load word))

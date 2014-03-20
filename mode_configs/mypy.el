@@ -7,8 +7,6 @@
 (require 'python)
 (add-to-list 'auto-mode-alist '("\\.py\\'\\|\\.wsgi\\'" . python-mode))
 
-
-
 (set-list-items '(py-force-py-shell-name-p
 		  py-align-multiline-strings-p
 		  py-shell-switch-buffers-on-execute-p
@@ -17,7 +15,6 @@
 		  py-tab-indent
 		  py-indent-honors-inline-comment)
 		t)
-
 
 (setq py-load-python-mode-pymacs-p nil)
 ;;(setq py-split-windows-on-execute-p nil)

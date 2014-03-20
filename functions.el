@@ -25,7 +25,7 @@
 ;; MA 02111-1307 USA
 
 ;; https://github.com/jscott/dot-emacs
-(require'cl)
+(eval-when-compile (require'cl))
 ;; (require 'namespaces)
 
 ;; (namespace js-functions
@@ -77,31 +77,6 @@
 (add-hook 'find-file-hooks (function (lambda ()
                                        (local-set-key (kbd "<tab>") 'indent-or-complete))))
 
-
-;; ;Make cursor stay in the same column when scrolling using pgup/dn.
-;; ;Previously pgup/dn clobbers column position, moving it to the
-;; ;beginning of the line.
-;; ;<http://www.dotemacs.de/dotfiles/ElijahDaniel.emacs.html>
-;; (defadvice scroll-up (around ewd-scroll-up first act)
-;;   "Keep cursor in the same column."
-;;   (let ((col (current-column)))
-;;     ad-do-it
-;;     (move-to-column col)))
-
-;; (defadvice scroll-down (around ewd-scroll-down first act)
-;;   "Keep cursor in the same column."
-;;   (let ((col (current-column)))
-;;     ad-do-it
-;;     (move-to-column col)))
-
-
-;; (defun pkg-check-p (favorite-packages)
-;;   "Verifies that the items in FAVORITE_PACKAGES have been installed"
-;;     (loop for p in favorite-packages
-;;                   when (not (package-installed-p p)) do (return nil)
-;;                           finally (return t)))
-
-
 (defun php-lint ()
   "Performs a PHP lint-check on the current file."
   (interactive)
@@ -148,27 +123,28 @@
    (interactive)
    (scroll-up 1)) 
 
+
 (defun files-in-below-directory (directory)
   "List the .el files in DIRECTORY and in its sub-directories."
   (interactive "Dir name: ")
   (let (el-files-list
-        (current-directory-list
-         (directory-files-and-attributes directory t)))
+	(current-directory-list
+	 (directory-files-and-attributes directory t)))
     (while current-directory-list
       (cond
        ((equal ".el" (substring (car (car current-directory-list)) -3))
-        (setq el-files-list
-              (cons (car (car current-directory-list)) el-files-list)))
+	(setq el-files-list
+	      (cons (car (car current-directory-list)) el-files-list)))
        ((eq t (car (cdr (car current-directory-list))))
-        (if
-            (equal "."
-                   (substring (car (car current-directory-list)) -1))
-            ()
-          (setq el-files-list
-                (append
-                 (files-in-below-directory
-                  (car (car current-directory-list)))
-                 el-files-list)))))
+	(if
+	    (equal "."
+		   (substring (car (car current-directory-list)) -1))
+	    ()
+	  (setq el-files-list
+		(append
+		 (files-in-below-directory
+		  (car (car current-directory-list)))
+		 el-files-list)))))
       (setq current-directory-list (cdr current-directory-list)))
     el-files-list))
 

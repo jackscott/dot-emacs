@@ -29,6 +29,7 @@
 ;; javascript
 (when (require 'javascript-mode nil t)
   (add-to-list 'auto-mode-alist '("\\.js\\'" . javascript-mode)))
+
 ;; php
 (when (require 'php-mode nil t)
   (add-hook 'php-mode-user-hook 'turn-on-font-lock)
@@ -36,8 +37,6 @@
   (add-to-list 'auto-mode-alist
 	       '("\\.php[34]\\'\\|\\.php\\'\\|\\.phtml\\'\\|\\.module\\'\\|\\.inc\\'"
 		 . php-mode)))
-
-
 
 ;; CSS-Mode
 (add-to-list 'auto-mode-alist '("\\.css\\'" . css-mode))
@@ -61,4 +60,10 @@
 
 (setq auto-mode-alist (cons '("\\.ebuild\\'" . ebuild-mode) auto-mode-alist)) 
 (setq auto-mode-alist (cons '("\\.eclass\\'" . ebuild-mode) auto-mode-alist))
+
+;; LUA
+(when (require 'lua-mode nil t)
+  ;;(autoload 'lua-mode "lua-mode" "Lua editing mode." t)
+  (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
+  (add-to-list 'interpreter-mode-alist '("lua" . lua-mode)))
 
