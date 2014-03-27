@@ -51,7 +51,9 @@
 	      magit markdown-mode mmm-mode paredit pcache php+-mode php-mode
 	      popup psgml pyflakes pylint python-pep8 python-pylint s slime
 	      virtualenvwrapper tangotango-theme naquadah-theme gist
-	      nrepl clojure-test-mode ein jedi nose elpy no-easy-keys))
+	      nrepl clojure-test-mode ein jedi nose elpy no-easy-keys
+	      helm helm-spotify helm-pydoc helm-delicious yas-jit
+              ac-slime ac-nrepl ac-ispell ac-helm ac-etags))
 
 
 (dolist (e '("functions" "visual" "keybindings"))
@@ -107,3 +109,6 @@
 ;; this setup looks decent on macs
 (set-face-attribute 'default nil
 		    :family "Inconsolata" :height 115 :weight 'normal)
+
+(add-to-list 'ac-dictionary-directories (emacsdir+ "ac-dict"))
+

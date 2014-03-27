@@ -26,6 +26,21 @@
 
 ;; https://github.com/jscott/dot-emacs
 
+(require 'auto-complete-config)
+(ac-config-default)
+; Use dictionaries by default
+(setq-default ac-sources (add-to-list 'ac-sources 'ac-source-dictionary))
+(global-auto-complete-mode t)
+; Start auto-completion after 2 characters of a word
+(setq ac-auto-start 2)
+; case sensitivity is important when finding matches
+(setq ac-ignore-case nil)
+
+(require 'yasnippet)
+(yas-global-mode 1)
+
+(add-to-list 'ac-sources 'ac-source-yasnippet)
+
 ;; turn off these variables
 (set-list-items '(make-backup-files
 		  auto-save-list-file-name
