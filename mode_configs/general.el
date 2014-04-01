@@ -108,3 +108,11 @@
 ;;     ("ewiki" "http://www.emacswiki.org/cgi-bin/wiki.pl" nil 3)
 ;;     ("pov" "point of view" nil Make)
 ;;     ))
+(require 'sr-speedbar)
+(setq sr-speedbar-width 40)
+(setq sr-speedbar-right-side nil)
+(setq sr-speedbar-skip-other-window-p t)
+(make-face 'speedbar-face)
+(set-face-font 'speedbar-face "Inconsolata-12")
+(setq speedbar-mode-hook '(lambda () (buffer-face-set 'speedbar-face)))
+
