@@ -107,8 +107,10 @@
   (setq mouse-sel-mode t))
 
 ;; this setup looks decent on macs
-(set-face-attribute 'default nil
-		    :family "Inconsolata" :height 115 :weight 'normal)
+(if (member "Iconsolata" (font-family-list))
+    (set-face-attribute 'default t
+                        :family "Inconsolata" :height 215 :weight 'normal))
+
 
 (add-to-list 'ac-dictionary-directories (emacsdir+ "ac-dict"))
 
