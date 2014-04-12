@@ -16,8 +16,10 @@
 ;;(defvar emacs-root (file-name-directory (buffer-file-name)))
 (defvar autosave-dir (emacsdir+ "auto-save-list"))
 
-(add-to-list 'load-path (emacsdir+ "elpa"))
-(add-to-list 'load-path emacs-root)
+(mapc
+ '(lambda (pathdir)
+    (add-to-list 'load-path pathdir))
+ '((emacsdir+ "elpa") emacs-root ))
 
 ;; emacs < 24 doesnt have packages functionality, load this in instead
 (if (< (string-to-number emacs-version) 24)
@@ -37,7 +39,6 @@
 
 ;; Load in packages
 (mapc
-
  '(lambda (pkgname)
     (if (not (package-installed-p pkgname))
 	(package-install pkgname)))
@@ -56,10 +57,11 @@
               ac-slime ac-nrepl ac-ispell ac-helm ac-etags))
 
 
-(dolist (e '("functions" "visual" "keybindings"))
+(dolist (e '("external/troels" "functions" "visual" "keybindings"))
   (load (concat emacs-root e)))
 
 (message (concat emacs-root "mode_configs"))
+
 ;; autoload all files in the mode_configs directory
 (dolist (word (files-in-below-directory (concat emacs-root "mode_configs")))
   (load word))
@@ -92,6 +94,7 @@
 ;; compile everything below EMACS-ROOT
 (byte-recompile-directory (file-name-directory emacs-root))
 
+(display-time)
 
 ;; Enable mouse support
 (unless window-system
@@ -106,11 +109,4 @@
   (defun track-mouse (e))
   (setq mouse-sel-mode t))
 
-;; this setup looks decent on macs
-(if (member "Iconsolata" (font-family-list))
-    (set-face-attribute 'default t
-                        :family "Inconsolata" :height 215 :weight 'normal))
-
-
-(add-to-list 'ac-dictionary-directories (emacsdir+ "ac-dict"))
 

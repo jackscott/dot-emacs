@@ -80,7 +80,7 @@
       scroll-step 1                   ; Only move in small increments.
       frame-title-format "%b GNU Emacs" ; Make the frame a bit more useful.
       mail-user-agent 'gnus-user-agent
-      fill-column 70
+      fill-column 80
       dired-recursive-copies t)
 
 ;; need to override the color coming from color-theme for some reason
@@ -101,3 +101,9 @@
    '(ada-mode c-mode c++-mode cperl-mode emacs-lisp-mode java-mode haskell-mode
               literate-haskell-mode html-mode lisp-mode php-mode python-mode ruby-mode
               scheme-mode sgml-mode sh-mode sml-mode tuareg-mode)))
+
+
+;; this setup looks decent on macs
+(if (member "Iconsolata" (font-family-list))
+    (set-face-attribute 'default t
+                        :family "Inconsolata" :height 215 :weight 'normal))

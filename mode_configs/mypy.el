@@ -1,20 +1,21 @@
-;; (require 'namespaces)
-;; (namespace js-modes-python
-;; 	   :import [ js-functions]
-;; 	   )
+(require 'namespaces)
+(namespace mypy
+	   :import [funcs]
+	   :packages [python]
+	   )
 
 ;; python
 (require 'python)
 (add-to-list 'auto-mode-alist '("\\.py\\'\\|\\.wsgi\\'" . python-mode))
 
-(set-list-items '(py-force-py-shell-name-p
-		  py-align-multiline-strings-p
-		  py-shell-switch-buffers-on-execute-p
-		  py-switch-buffers-on-execute-p
-		  py-smart-indentation
-		  py-tab-indent
-		  py-indent-honors-inline-comment)
-		t)
+(funcs/set-list-items '(py-force-py-shell-name-p
+			py-align-multiline-strings-p
+			py-shell-switch-buffers-on-execute-p
+			py-switch-buffers-on-execute-p
+			py-smart-indentation
+			py-tab-indent
+			py-indent-honors-inline-comment)
+		      t)
 
 (setq py-load-python-mode-pymacs-p nil)
 ;;(setq py-split-windows-on-execute-p nil)

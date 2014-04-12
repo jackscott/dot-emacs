@@ -30,63 +30,30 @@
 ;;
 ;;; Commentary:
 ;;
-;;; THIS CODE WAS SAMPLED FROM Troels Henriksen's sample .emacs file
-;;; Copyright (C) 2003-2005 Troels Henriksen <athas@sigkill.dk>
 ;;
-;; (require 'namespaces)
-;; (namespace js-keybindings
-;; 	   :import [js-funcs]
-;; 	   :export [ global-set-keys
-;; 		     set-keybinding-for-maps
-;; 		     define-keys
-;; 		     up-slightly
-;; 		     down-slightly]
-;; 	   )
+(require 'namespaces)
+(namespace keys
+	   :import [funcs])
 
-(defmacro global-set-keys (&rest keycommands)
-  "Register keys to commands.
-Analyze KEYCOMMANDS in pairs, and maps the corresponding keys
-to the corresponding functions."
-  (let ((setkey-list nil))
-    (while keycommands
-      (let ((key (car keycommands))
-            (command (cadr keycommands)))
-        (push `(global-set-key (kbd ,key)
-                               ,command)
-              setkey-list))
-      (setq keycommands (cddr keycommands)))
-    (push 'progn setkey-list)
-    setkey-list))
+(defn mychmod()
+  "Performs a chmod & chown on the current file."
+  (interactive)
+  (shell-command (format "sudo chown :users %s && sudo chmod 775 %s" (buffer-file-name buffer-file-name)))
+  ;;(shell-command (concat "sudo chmod 775 " (buffer-file-name)))
+  (myrefresh))
 
-(defmacro set-keybinding-for-maps (key command &rest keymaps)
-  "Register keys to commands in a nuber of keymaps.
-Maps KEY to COMMAND in the keymaps listed in KEYMAPS."
-  (let ((defkey-list nil))
-    (while keymaps
-      (let ((current-map (first keymaps)))
-        (push `(define-key 
-                 ,current-map 
-                 (kbd ,key)
-                 ,command)
-              defkey-list))
-      (setq keymaps (rest keymaps)))
-    (push 'progn defkey-list)
-    defkey-list))
-
-(defmacro define-keys (keymap &rest args)
-  `(progn
-     ,@(let (defs)
-         (while args
-           (let ((key (first args))
-                 (def (second args)))
-             (push `(define-key ,keymap ,key ,def) defs))
-           (setf args (cddr args)))
-         defs)))
+;;
+(defn myrefresh()
+  "Reloads the file from disk"
+  (interactive)
+  (revert-buffer t t)
+  (message (format "Reloaded %s from disk" (buffer-file-name))))
 
 (global-set-keys 
  "\M-`"         'shell
- "\C-xh"        'mychmod
- "\C-xr"        'myrefresh
+ ;;"\C-xh"        'mychmod
+ "\C-xh"        (~ mychmod)
+ "\C-xr"        (~ myrefresh)
  "\C-xl"        'goto-line
  "\C-w"         'backward-kill-word
  "\C-x\C-k"     'kill-region

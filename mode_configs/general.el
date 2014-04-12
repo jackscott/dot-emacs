@@ -24,33 +24,32 @@
 ;; Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
 ;; MA 02111-1307 USA
 
-;; https://github.com/jscott/dot-emacs
 
+;; https://github.com/jscott/dot-emacs
+(eval-when-compile (require'cl))
+(require 'namespaces)
+
+(namespace general
+	   :use [cl uniquify]
+	   :export []
+	   :packages [yasnippet ido sr-speedbar ])
+
+;; setup auto-complete stuff.  
 (require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories (emacsdir+ "ac-dict"))
 (ac-config-default)
-; Use dictionaries by default
 (setq-default ac-sources (add-to-list 'ac-sources 'ac-source-dictionary))
 (global-auto-complete-mode t)
-; Start auto-completion after 2 characters of a word
-(setq ac-auto-start 2)
-; case sensitivity is important when finding matches
-(setq ac-ignore-case nil)
+(setq ac-auto-start 2 ac-ignore-case nil)
 
-(require 'yasnippet)
+
+;; yasnippet
 (yas-global-mode 1)
-
 (add-to-list 'ac-sources 'ac-source-yasnippet)
 
-;; turn off these variables
-(set-list-items '(make-backup-files
-		  auto-save-list-file-name
-		  auto-save-default
-		  indent-tabs-mode
-		  scroll-bar-mode)
-		nil)
 
-;; activate these vars
-(set-list-items '(inhibit-startup-message
+;; set all of these to TRUE
+(funcs/set-list-items '(inhibit-startup-message
 		  search-highlight
 		  query-replace-highlight
 		  mouse-sel-retain-highlight
@@ -70,29 +69,26 @@
 		  highlight-parentheses-mode)
 		t)
 
-(display-time)
-
 ;; git configuration
-(when (require 'vc-git nil t)
+(with-feature 'vc-git
   (add-to-list 'vc-handled-backends 'git))
 
 (autoload 'git-blame-mode "git-blame"
            "Minor mode for incremental blame for Git." t)
 
 ;; Apache mdoe
-(when (require 'apache-mode nil t)
+(with-feature 'apache-mode
   (add-to-list 'auto-mode-alist '("commonapache[12]\?\\.conf$" . apache-mode))
   (add-to-list 'auto-mode-alist '("^.+\/vhosts\.d\/.+\.conf$" . apache-mode))
   (add-to-list 'auto-mode-alist '("^.+\/modules\.d\/.+\.conf$" . apache-mode))
   (add-to-list 'auto-mode-alist '("\\.htaccess\\|\\httpd\\.conf\\|\\access\\.conf\\|\\apache[12]\?\\.conf" . apache-mode)))
 
-(require 'uniquify)
+
 (setq uniquify-buffer-name-style 'forward)
 (setq uniquify-separator "/")
 (setq uniquify-after-kill-buffer-p t)
 (setq uniquify-ignore-buffers-re "^\\*")
 
-(require 'ido)
 (ido-mode t)
 
 (when (require 'autopair nil t)
@@ -108,11 +104,11 @@
 ;;     ("ewiki" "http://www.emacswiki.org/cgi-bin/wiki.pl" nil 3)
 ;;     ("pov" "point of view" nil Make)
 ;;     ))
-(require 'sr-speedbar)
-(setq sr-speedbar-width 40)
-(setq sr-speedbar-right-side nil)
-(setq sr-speedbar-skip-other-window-p t)
-(make-face 'speedbar-face)
-(set-face-font 'speedbar-face "Inconsolata-12")
+
+(setq sr-speedbar-width 40
+      sr-speedbar-right-side nil
+      sr-speedbar-skip-other-window-p t)
+
+;;(set-face-font 'speedbar-face "Inconsolata-12")
 (setq speedbar-mode-hook '(lambda () (buffer-face-set 'speedbar-face)))
 

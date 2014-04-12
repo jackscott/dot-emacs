@@ -26,43 +26,12 @@
 
 ;; https://github.com/jscott/dot-emacs
 (eval-when-compile (require'cl))
-;; (require 'namespaces)
+(require 'namespaces)
 
-;; (namespace js-functions
-;; 	   :use [ cl]
-;; 	   :export [ with-feature
-;; 		     with-features
-;; 		     scroll-up
-;; 		     scroll-down])
+(namespace funcs
+	   :use [cl]
+	   :export [set-list-items])
 
-;; ;;;;;
-;; ;;; noerr-require with-feature and withfeatures came from this guy:
-;; ;;; git://github.com/Athas/Configuration-Files.git  but way before it
-;; ;;; was in github.
-;; ;;;;;
-
-;; (defun noerr-require (feature)
-;;   "`require' FEATURE, but don't invoke any Lisp errors.
-;; If FEATURE cannot be loaded, this function will print an error
-;; message through `message' and return nil. It otherwise behaves
-;; exactly as `require'."
-;;   (ignore-errors
-;;     (require feature (symbol-name feature) t)))
-
-;; (defmacro with-feature (feature &rest body)
-;;   "Require FEATURE and execute BODY.
-;; If FEATURE can't be loaded, don't execute BODY."
-;;   (when (_ noerr-require (car feature))
-;;     (push 'progn body)))
-
-;; (defmacro with-features (features &rest body)
-;;   "Require FEATURES and execute BODY.
-;; If any of FEATURES cannot be loaded, don't execute BODY."
-;;   (if features
-;;       `(with-feature (,(first features))
-;;          (with-features ,(cdr features)
-;;            ,@body))
-;;     `(progn ,@body)))
 
 
 ;;(setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
@@ -96,22 +65,6 @@
     (if (file-exists-p (concat h f))
         (compile (format "%s -E --rcfile=%s %s" cmd (concat h f) (buffer-file-name)))
       (compile (format "%s -E %s" cmd (buffer-file-name))))))
-
-
-(defun mychmod()
-  "Performs a chmod & chown on the current file."
-  (interactive)
-  (shell-command (format "sudo chown :users %s && sudo chmod 775 %s" (buffer-file-name buffer-file-name)))
-  ;;(shell-command (concat "sudo chmod 775 " (buffer-file-name)))
-  (myrefresh))
-
-;;
-(defun myrefresh()
-  "Reloads the file from disk"
-  (interactive)
-  (revert-buffer t t)
-  (message (format "Reloaded %s from disk" (buffer-file-name))))
-
 
 (defun scroll-down-keep-cursor ()
    ;; Scroll the text one line down while keeping the cursor
@@ -148,7 +101,7 @@
       (setq current-directory-list (cdr current-directory-list)))
     el-files-list))
 
-(defun set-list-items (thelist val)
-  "Iterate THELIST and pass VAL to set"
+(defn set-list-items (thelist val)
+  "Iterate THELIST calling (SET `key` VAL)"
   (mapc #'(lambda (x) (set x val)) thelist))
 
