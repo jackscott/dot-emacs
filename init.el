@@ -63,7 +63,8 @@
 (message (concat emacs-root "mode_configs"))
 
 ;; autoload all files in the mode_configs directory
-(dolist (word (files-in-below-directory (concat emacs-root "mode_configs")))
+(dolist (word '((files-in-below-directory (concat emacs-root "mode_configs"))
+		(files-in-below-directory (concat emacs-root "autoloads")))
   (load word))
 
 (require 'no-easy-keys)
