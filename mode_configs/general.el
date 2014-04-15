@@ -105,10 +105,3 @@
 ;;     ("pov" "point of view" nil Make)
 ;;     ))
 
-(setq sr-speedbar-width 40
-      sr-speedbar-right-side nil
-      sr-speedbar-skip-other-window-p t)
-
-;;(set-face-font 'speedbar-face "Inconsolata-12")
-(setq speedbar-mode-hook '(lambda () (buffer-face-set 'speedbar-face)))
-

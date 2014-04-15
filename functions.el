@@ -30,9 +30,28 @@
 
 (namespace funcs
 	   :use [cl]
-	   :export [set-list-items])
+	   :export [set-list-items toggle-bars mychmod myrefresh])
 
 
+(defn toggle-bars ()
+  (interactive)
+  (scroll-bar-mode)
+  (menu-bar-mode)
+  (tool-bar-mode)
+  (sr-speedbar-open))
+
+(defn mychmod()
+  "Performs a chmod & chown on the current file."
+  (interactive)
+  (shell-command (format "sudo chown :users %s && sudo chmod 775 %s" (buffer-file-name buffer-file-name)))
+  ;;(shell-command (concat "sudo chmod 775 " (buffer-file-name)))
+  (myrefresh))
+
+(defn myrefresh()
+  "Reloads the file from disk"
+  (interactive)
+  (revert-buffer t t)
+  (message (format "Reloaded %s from disk" (buffer-file-name))))
 
 ;;(setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
 ;"To hit tab to auto-complete (like bash does) put this in your .emacs:"
@@ -104,4 +123,3 @@
 (defn set-list-items (thelist val)
   "Iterate THELIST calling (SET `key` VAL)"
   (mapc #'(lambda (x) (set x val)) thelist))
-

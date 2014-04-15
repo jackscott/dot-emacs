@@ -63,10 +63,12 @@
 (message (concat emacs-root "mode_configs"))
 
 ;; autoload all files in the mode_configs directory
-(dolist (word '((files-in-below-directory (concat emacs-root "mode_configs"))
-		(files-in-below-directory (concat emacs-root "autoloads")))
+(dolist (word (files-in-below-directory (concat emacs-root "mode_configs")))
   (load word))
 
+(dolist (word (files-in-below-directory (concat emacs-root "autoloads")))
+  (load word))
+  
 (require 'no-easy-keys)
 (no-easy-keys 1)
 
@@ -109,5 +111,3 @@
 			       (scroll-up 1)))
   (defun track-mouse (e))
   (setq mouse-sel-mode t))
-
-

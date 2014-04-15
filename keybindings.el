@@ -51,9 +51,8 @@
 
 (global-set-keys 
  "\M-`"         'shell
- ;;"\C-xh"        'mychmod
- "\C-xh"        (~ mychmod)
- "\C-xr"        (~ myrefresh)
+ "\C-xh"        (~ funcs/mychmod)
+ "\C-xr"        (~ funcs/myrefresh)
  "\C-xl"        'goto-line
  "\C-w"         'backward-kill-word
  "\C-x\C-k"     'kill-region
@@ -95,6 +94,7 @@
 (global-set-key [mouse-6] 'down-slightly )
 ;; for some reason this is necessary for the mac
 (global-set-key [mouse-4] 'down-slightly )
+
 (global-set-key (kbd "<C-tab>") 'other-window)
 ;;(global-set-key "\C-\M-z" 'undo)
 

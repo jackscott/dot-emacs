@@ -25,10 +25,10 @@
 ;; MA 02111-1307 USA
 
 ;; https://github.com/jscott/dot-emacs
-;; (require 'namespaces)
-;; (namespace js-visual
-;; 	   :use [cl]
-;; 	   :import [ (js-functions with-feature) ])
+(require 'namespaces)
+(namespace visual
+	   :use [cl]
+	   :import [ funcs ])
 
 (defun my-theme-set-default ()
   (interactive)
@@ -71,7 +71,6 @@
    (setq theme-current my-color-themes)
    (my-theme-set-default)
    (global-set-key [f12] 'my-theme-cycle))
-
 
 (setf pop-up-windows nil        ; Don't change my windowconfiguration.
       european-calendar-style t         ; Use european date format.
