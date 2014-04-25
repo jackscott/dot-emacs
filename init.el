@@ -12,12 +12,10 @@
 (defvar *emacs-load-start* (current-time))
 (defvar user-name (getenv "USER"))
 (defvar emacs-root (file-name-directory (or load-file-name buffer-file-name)))
-
-;;(defvar emacs-root (file-name-directory (buffer-file-name)))
 (defvar autosave-dir (emacsdir+ "auto-save-list"))
 
 (mapc
- '(lambda (pathdir)
+ (lambda (pathdir)
     (add-to-list 'load-path pathdir))
  '((emacsdir+ "elpa") emacs-root ))
 
@@ -39,7 +37,7 @@
 
 ;; Load in packages
 (mapc
- '(lambda (pkgname)
+ (lambda (pkgname)
     (if (not (package-installed-p pkgname))
 	(package-install pkgname)))
 
@@ -54,20 +52,16 @@
 	      virtualenvwrapper tangotango-theme naquadah-theme gist
 	      nrepl clojure-test-mode ein jedi nose elpy no-easy-keys
 	      helm helm-spotify helm-pydoc helm-delicious yas-jit
-              ac-slime ac-nrepl ac-ispell ac-helm ac-etags tramp))
+              ac-slime ac-nrepl ac-ispell ac-helm ac-etags))
 
-
-(dolist (e '("external/troels" "functions" "visual" "keybindings"))
+(dolist (e '("external/troels"  "functions" "settings" "visual" "keybindings"))
   (load (concat emacs-root e)))
 
-(message (concat emacs-root "mode_configs"))
+;;(message (concat emacs-root "mode_configs"))
 
-;; autoload all files in the mode_configs directory
-(dolist (word (files-in-below-directory (concat emacs-root "mode_configs")))
-  (load word))
-
-(dolist (word (files-in-below-directory (concat emacs-root "autoloads")))
-  (load word))
+(dolist (e ("mode_configs" "autoloads"))
+  (dolist (word (files-in-below-directory (concat emacs-root e)))
+    (load word)))
   
 (require 'no-easy-keys)
 (no-easy-keys 1)

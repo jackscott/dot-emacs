@@ -48,27 +48,6 @@
 (add-to-list 'ac-sources 'ac-source-yasnippet)
 
 
-;; set all of these to TRUE
-(funcs/set-list-items '(inhibit-startup-message
-		  search-highlight
-		  query-replace-highlight
-		  mouse-sel-retain-highlight
-		  bookmark-save-flag
-		  font-lock-maximum-decoration
-		  mouse-wheel-mode
-		  x-select-enable-clipboard
-		  show-paren-mode
-		  global-font-lock-mode
-		  xterm-mouse-mode
-		  read-buffer-completion-ignore-case
-		  read-file-name-completion-ignore-case
-		  transient-mark-mode
-		  line-number-mode
-		  column-number-mode
-		  show-paren-mode
-		  highlight-parentheses-mode)
-		t)
-
 ;; git configuration
 (with-feature 'vc-git
   (add-to-list 'vc-handled-backends 'git))

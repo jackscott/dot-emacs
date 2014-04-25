@@ -30,7 +30,7 @@
 
 (namespace funcs
 	   :use [cl]
-	   :export [set-list-items toggle-bars mychmod myrefresh])
+	   :export [set-list-items toggle-bars mychmod myrefresh sr-speedbar])
 
 
 (defn toggle-bars ()

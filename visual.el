@@ -28,7 +28,8 @@
 (require 'namespaces)
 (namespace visual
 	   :use [cl]
-	   :import [ funcs ])
+	   :import [ funcs ]
+	   :packages [sr-speedbar])
 
 (defun my-theme-set-default ()
   (interactive)
@@ -86,8 +87,6 @@
 ;;(set-face-foreground 'mode-line-buffer-id "darkblue")
 
 (global-hl-line-mode nil)
-;;(set-face-background 'hl-line "#111")
-
 
 ;"Set up highlighting of special words for selected modes."
 ; <http://www.metasyntax.net/unix/dot-emacs.html>
@@ -106,3 +105,4 @@
 (if (member "Iconsolata" (font-family-list))
     (set-face-attribute 'default t
                         :family "Inconsolata" :height 215 :weight 'normal))
+(sr-speedbar-open)
