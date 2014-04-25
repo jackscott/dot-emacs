@@ -8,10 +8,17 @@
   "Create an bsolute path to ~/.emacs.d/``path``"
   (format "%s/.emacs.d/%s" (getenv "HOME") path))
 
-(defvar *pidfile* "emacs-server.pid")
+(defvar emacs-root (file-name-directory (or load-file-name buffer-file-name)))
+(defun dotdir+ (path)
+  "Return an absolute path to DOT-EMACS directory"
+  (format "%s%s" emacs-root path))
+
+  
+
+	  (defvar *pidfile* "emacs-server.pid")
 (defvar *emacs-load-start* (current-time))
 (defvar user-name (getenv "USER"))
-(defvar emacs-root (file-name-directory (or load-file-name buffer-file-name)))
+
 (defvar autosave-dir (emacsdir+ "auto-save-list"))
 
 (mapc
@@ -57,12 +64,13 @@
 (dolist (e '("external/troels"  "functions" "settings" "visual" "keybindings"))
   (load (concat emacs-root e)))
 
-;;(message (concat emacs-root "mode_configs"))
+;; load everything under these two directories
+(mapc
+ (lambda (dir)
+   (dolist (word (files-in-below-directory (dotdir+ dir)))
+     (load word)))
+ '("mode_configs" "autoloads"))
 
-(dolist (e ("mode_configs" "autoloads"))
-  (dolist (word (files-in-below-directory (concat emacs-root e)))
-    (load word)))
-  
 (require 'no-easy-keys)
 (no-easy-keys 1)
 
