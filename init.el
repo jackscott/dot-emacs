@@ -59,7 +59,8 @@
 	      virtualenvwrapper tangotango-theme naquadah-theme gist
 	      nrepl clojure-test-mode ein jedi nose elpy no-easy-keys
 	      helm helm-spotify helm-pydoc helm-delicious yas-jit
-              ac-slime ac-nrepl ac-ispell ac-helm ac-etags))
+              ac-slime ac-nrepl ac-ispell ac-helm ac-etags
+	      starter-kit-lisp starter-kit-js ))
 
 (dolist (e '("external/troels"  "functions" "settings" "visual" "keybindings"))
   (load (concat emacs-root e)))
