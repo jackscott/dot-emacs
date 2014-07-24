@@ -48,7 +48,9 @@
     (if (not (package-installed-p pkgname))
 	(package-install pkgname)))
 
- '(namespaces auto-complete bash-completion bookmark+ clojure-mode
+ '(namespaces starter-kit starter-kit-lisp starter-kit-bindings
+              starter-kit-eshell clojure-mode clojure-test-mode cider
+              auto-complete bash-completion bookmark+
 	      color-theme color-theme-approximate color-theme-dawn-night
 	      color-theme-solarized color-theme-tango concurrent
 	      ctable dash deferred epc find-things-fast flymake-easy
@@ -57,10 +59,10 @@
 	      magit markdown-mode mmm-mode paredit pcache php+-mode php-mode
 	      popup psgml pyflakes pylint python-pep8 python-pylint s slime
 	      virtualenvwrapper tangotango-theme naquadah-theme gist
-	      nrepl clojure-test-mode ein jedi nose elpy no-easy-keys
+	      ein jedi nose elpy no-easy-keys
 	      helm helm-spotify helm-pydoc helm-delicious yas-jit
               ac-slime ac-nrepl ac-ispell ac-helm ac-etags
-	      starter-kit-lisp starter-kit-js ))
+              starter-kit-js smartparens))
 
 (dolist (e '("external/troels"  "functions" "settings" "visual" "keybindings"))
   (load (concat emacs-root e)))
