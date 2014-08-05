@@ -105,4 +105,5 @@
 (if (member "Iconsolata" (font-family-list))
     (set-face-attribute 'default t
                         :family "Inconsolata" :height 215 :weight 'normal))
-(sr-speedbar-open)
+
+;(sr-speedbar-open)

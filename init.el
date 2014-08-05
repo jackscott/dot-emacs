@@ -64,7 +64,9 @@
               ac-slime ac-nrepl ac-ispell ac-helm ac-etags
               starter-kit-js smartparens))
 
-(dolist (e '("external/troels"  "functions" "settings" "visual" "keybindings"))
+(dolist (e '("external/troels"  "functions" ;"settings" "visual"
+                                        ;"keybindings"
+             ))
   (load (concat emacs-root e)))
 
 ;; load everything under these two directories
