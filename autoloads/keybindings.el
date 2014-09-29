@@ -33,7 +33,7 @@
 ;;
 (require 'namespaces)
 (namespace keys
-	   :import [funcs])
+	   :import [funcs visual])
 
 (defn mychmod()
   "Performs a chmod & chown on the current file."
@@ -56,8 +56,7 @@
  "\C-xl"        'goto-line
  "\C-w"         'backward-kill-word
  "\C-x\C-k"     'kill-region
- "\C-c\C-k"     'kill-region
- "\C-xw"        'goto-line
+  "\C-xw"        'goto-line
  "\C-x\C-b"     'buffer-menu
  "\C-cn"        'bs-cycle-next
  "\C-cp"        'bs-cycle-previous
@@ -68,18 +67,20 @@
  "\C- "         'set-mark-command
  "\M-x"         'execute-extended-command
  "\M-c"         'capitalize-word
+
  "\C-\M-z"      'undo
  "\C-s"         'isearch-forward
  "\C-xp"        'mypylint
  "\C-x\C-e"     'eval-region
  "\C-cg"        'magit-status
+ 
  "\C-c\C-o"     'slime-close-all-parens-in-sexp
  "\C-c\C-p"     'paredit-open-round
  "\C-f"		'right-char
 )
- ;;"\C-xp"        'py-pychecker-run
 
 (define-key isearch-mode-map "\C-s" 'isearch-repeat-forward)
+
 
 ;;;;;
 ;; Mouse Definitions
