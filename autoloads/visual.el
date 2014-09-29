@@ -29,7 +29,7 @@
 (namespace visual
 	   :use [cl]
 	   :import [ funcs ]
-	   :packages [sr-speedbar])
+	   :packages [sr-speedbar color-theme])
 
 (defun my-theme-set-default ()
   (interactive)
@@ -48,30 +48,50 @@
   (funcall (car theme-current))
   (message "%S" (car theme-current)))
 
+(defun toggle-fullscreen ()
+  "Toggle full screen"
+  (interactive)
+  (set-frame-parameter
+     nil 'fullscreen
+     (when (not (frame-parameter nil 'fullscreen)) 'fullboth)))
+
 ;; ;(setq linum-format "%4d \u2502")
 ;; (setq linum-format "%4d")
 ;; ;(setq linum-format "%d ")
 ;; (global-linum-mode t)
 
-(when (require 'color-theme nil t)
-   (color-theme-initialize)
-   (setq color-theme-is-global 0)
-   (setq ring-bell-function 'ignore)
-   (menu-bar-mode -1)
-   (blink-cursor-mode -1)
+(setq ring-bell-function 'ignore)
+(menu-bar-mode -1)
+(blink-cursor-mode -1)
 
-   (setq my-color-themes (list 'color-theme-dark-laptop 'color-theme-ld-dark
-			       'color-theme-calm-forest
-			       'color-theme-gray30 'color-theme-jsc-dark
-			       'color-theme-sitaramv-solaris 'color-theme-resolve
-			       'color-theme-classic 'color-theme-jonadabian-slate
-			       'color-theme-kingsajz 'color-theme-shaman
-			       'color-theme-subtle-blue 'color-theme-snowish
-			       'color-theme-sitaramv-nt 'color-theme-wheat))
+(color-theme-initialize)
+(setq color-theme-is-global 0)
 
-   (setq theme-current my-color-themes)
-   (my-theme-set-default)
-   (global-set-key [f12] 'my-theme-cycle))
+
+;;; TODO
+;; refactor this, grouping into categroies and changing the theme
+;; category depending on the time of day.  maybe cycle themes every 20-30
+;; mins, might get annoying
+(setq my-color-themes (list 'color-theme-dark-laptop
+                            'color-theme-ld-dark
+                            'color-theme-calm-forest
+                            'color-theme-gray30
+                            'color-theme-jsc-dark
+                            'color-theme-sitaramv-solaris
+                            'color-theme-resolve
+                            'color-theme-classic
+                            'color-theme-jonadabian-slate
+                            'color-theme-kingsajz
+                            'color-theme-shaman
+                            'color-theme-subtle-blue
+                            'color-theme-snowish
+                            'color-theme-sitaramv-nt
+                            'color-theme-wheat))
+
+(setq theme-current my-color-themes)
+(my-theme-set-default)
+
+
 
 (setf pop-up-windows nil        ; Don't change my windowconfiguration.
       european-calendar-style t         ; Use european date format.
@@ -80,25 +100,29 @@
       scroll-step 1                   ; Only move in small increments.
       frame-title-format "%b GNU Emacs" ; Make the frame a bit more useful.
       mail-user-agent 'gnus-user-agent
-      fill-column 80
+      fill-column 100
       dired-recursive-copies t)
 
 ;; need to override the color coming from color-theme for some reason
-;;(set-face-foreground 'mode-line-buffer-id "darkblue")
+(set-face-foreground 'mode-line-buffer-id "blue")
 
 (global-hl-line-mode nil)
 
 ;"Set up highlighting of special words for selected modes."
 ; <http://www.metasyntax.net/unix/dot-emacs.html>
-(make-face 'taylor-special-words)
-(set-face-attribute 'taylor-special-words nil :foreground "White" :background "Firebrick")
+(make-face 'super-special-words)
+(set-face-attribute 'super-special-words nil
+                    :foreground "White"
+                    :background "Firebrick")
+
 (let ((pattern "\\<\\(FIXME\\|TODO\\|NOTE\\|WARNING\\|BUGS\\|USE\\):"))
   (mapc
    (lambda (mode)
-     (font-lock-add-keywords mode `((,pattern 1 'taylor-special-words prepend))))
+     (font-lock-add-keywords mode `((,pattern 1 'super-special-words prepend))))
+   ;; NOTE: can't de do `prog-mode` or something like that here?
    '(ada-mode c-mode c++-mode cperl-mode emacs-lisp-mode java-mode haskell-mode
-              literate-haskell-mode html-mode lisp-mode php-mode python-mode ruby-mode
-              scheme-mode sgml-mode sh-mode sml-mode tuareg-mode)))
+              literate-haskell-mode html-mode lisp-mode php-mode python-mode
+              ruby-mode scheme-mode sgml-mode sh-mode sml-mode tuareg-mode)))
 
 
 ;; this setup looks decent on macs
@@ -106,4 +130,10 @@
     (set-face-attribute 'default t
                         :family "Inconsolata" :height 215 :weight 'normal))
 
+
+;; cycle through color themes
+(global-set-key [f12] 'my-theme-cycle)
+(global-set-key (kbd "M-<return>") 'toggle-fullscreen)
+
+(toggle-fullscreen)
 ;(sr-speedbar-open)
