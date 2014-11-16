@@ -15,7 +15,7 @@
 
   
 
-	  (defvar *pidfile* "emacs-server.pid")
+(defvar *pidfile* "emacs-server.pid")
 (defvar *emacs-load-start* (current-time))
 (defvar user-name (getenv "USER"))
 
@@ -36,9 +36,9 @@
         (url-copy-file "http://bit.ly/pkg-el23" f)
         (load f)))))
 
-(setq package-archives '(;("gnu" . "http://elpa.gnu.org/packages/")
-                         ("marmalade" . "http://marmalade-repo.org/packages/")
-                         ("melpa" . "http://melpa.milkbox.net/packages/")))
+(setq package-archives '(("marmalade" . "http://marmalade-repo.org/packages/")
+                         ("melpa" . "http://melpa.milkbox.net/packages/")
+                         ("gnu" . "http://elpa.gnu.org/packages/")))
 
 (package-initialize)
 
