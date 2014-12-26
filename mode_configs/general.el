@@ -32,7 +32,7 @@
 (namespace general
 	   :use [cl uniquify]
 	   :export []
-	   :packages [yasnippet ido sr-speedbar ])
+	   :packages [yasnippet ido sr-speedbar bug-reference-github])
 
 ;; setup auto-complete stuff.  
 (require 'auto-complete-config)
@@ -73,6 +73,7 @@
 (when (require 'autopair nil t)
   (setq autopair-mode t))
 
+
 ;; (setq-default abbrev-mode t)
 ;; (setq abbrev-file-name (emacsdir+ "abbrev_defs.txt"))
 ;; (define-abbrev-table 'global-abbrev-table
@@ -84,3 +85,4 @@
 ;;     ("pov" "point of view" nil Make)
 ;;     ))
 
+(add-hook 'prog-mode-hook 'bug-reference-github-set-url-format)
