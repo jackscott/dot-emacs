@@ -48,10 +48,9 @@
     (if (not (package-installed-p pkgname))
 	(package-install pkgname)))
 
- '(namespaces starter-kit starter-kit-lisp starter-kit-bindings
-              starter-kit-eshell clojure-mode clojure-test-mode cider
+ '(namespaces clojure-mode cider better-defaults rainbow-delimiters
               auto-complete bash-completion bookmark+
-	      color-theme color-theme-approximate color-theme-dawn-night
+	      color-theme color-theme-approximate
 	      color-theme-solarized color-theme-tango concurrent
 	      ctable dash deferred epc find-things-fast flymake-easy
 	      flymake-jslint flymake-python-pyflakes groovy-mode

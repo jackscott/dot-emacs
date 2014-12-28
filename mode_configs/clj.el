@@ -4,13 +4,14 @@
 	   :packages [starter-kit-lisp cider clojure-mode
                                        bug-reference-github
                                        midje-mode
-                                       midje-test-mode
-                                       clojure-jump-to-file])
+                                       ;midje-test-mode
+                                       ;clojure-jump-to-file
+                                       ])
 
 ;; (require 'starter-kit-lisp)
 ;; (require 'cider)
 ;; (require 'clojure-mode)
-;; (require 'midje-mode)
+(require 'midje-mode)
 ;; (require 'clojure-jump-to-file)
 (add-hook 'clojure-mode-hook 'midje-mode)
 
@@ -41,6 +42,7 @@
 (add-hook 'cider-repl-mode-hook 'paredit-mode)
 (add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
 
+
 ;; make a keybinding for this
-;;(use 'midje.repl) (autotest)
+;(use 'midje.repl) (autotest)
 
