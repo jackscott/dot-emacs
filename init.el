@@ -48,24 +48,33 @@
     (if (not (package-installed-p pkgname))
 	(package-install pkgname)))
 
- '(namespaces clojure-mode cider better-defaults rainbow-delimiters
-              auto-complete bash-completion bookmark+
-	      color-theme color-theme-approximate
+ '( clojure-mode cider better-defaults rainbow-delimiters
+              auto-complete bash-completion bookmark+ align-cljlet
+
+              color-theme color-theme-approximate
 	      color-theme-solarized color-theme-tango concurrent
 	      ctable dash deferred epc find-things-fast flymake-easy
-	      flymake-jslint flymake-python-pyflakes groovy-mode
+
+              flymake-jslint flymake-python-pyflakes groovy-mode
 	      highlight-parentheses icicles json-mode logito lua-mode
-	      magit markdown-mode mmm-mode paredit pcache php+-mode php-mode
-	      popup psgml pyflakes pylint python-pep8 python-pylint s slime
-	      virtualenvwrapper tangotango-theme naquadah-theme gist
-	      ein jedi nose elpy no-easy-keys
-	      helm helm-spotify helm-pydoc helm-delicious yas-jit
+	      magit markdown-mode ;mmm-mode
+              paredit pcache
+	      ;popup psgml
+              ;; elisp/lisp things namespaces
+              s slime ein
+              ;; python
+              pyflakes pylint python-pep8 python-pylint virtualenvwrapper
+              jedi nose elpy
+
+              ;;other
+              tangotango-theme naquadah-theme gist
+              no-easy-keys
+	      helm  helm-pydoc helm-delicious yas-jit ;helm-spotify
               ac-slime ac-nrepl ac-ispell ac-helm ac-etags
               starter-kit-js smartparens))
 
-(dolist (e '("external/troels"  "functions" ;"settings" "visual"
-                                        ;"keybindings"
-             ))
+
+(dolist (e '("external/troels"  "functions"))
   (load (concat emacs-root e)))
 
 ;; load everything under these two directories
@@ -75,8 +84,6 @@
      (load word)))
  '("mode_configs" "autoloads"))
 
-(require 'no-easy-keys)
-(no-easy-keys 1)
 
 ;;; 1 Emacs a bitch to close (C-x C-c is sooo easy to hit):
 (add-to-list 'kill-emacs-query-functions
