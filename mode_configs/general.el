@@ -34,6 +34,9 @@
 	   :export []
 	   :packages [yasnippet ido sr-speedbar bug-reference-github])
 
+(require 'no-easy-keys)
+(no-easy-keys 1)
+
 ;; setup auto-complete stuff.  
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories (emacsdir+ "ac-dict"))
