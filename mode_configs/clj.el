@@ -13,8 +13,7 @@
                                        ])
 ;; handle CamelCase shit in java
 (add-hook 'clojure-mode-hook 'subword-mode)
-
-;(add-hook 'clojure-mode-hook 'paredit-mode)
+(add-hook 'clojure-mode-hook 'paredit-mode)
 (add-hook 'clojure-mode-hook 'smartparens-strict-mode)
 
 ;; docs are good
@@ -38,18 +37,3 @@
 (add-hook 'cider-repl-mode-hook 'subword-mode)
 (add-hook 'cider-repl-mode-hook 'paredit-mode)
 (add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
-
-;; (map '(lambda (x) (add-hook 'cider-repl-mode-hook x))
-;;      '(subword-mode
-;;        paredit-mode
-;;        rainbow-delimiters-mode))
-
-;; ;; (setq '([cider-show-error-buffer only-in-repl]
-;; ;;         [nrepl-buffer-name-separator "-"]
-;; ;;         [cider-prompt-save-file-on-load nil]
-;; ;;         [cider-repl-result-prefix ";; => "]
-;; ;;         [cider-repl-history-size 10000]
-;; ;;         ))
-
-
-;; -
