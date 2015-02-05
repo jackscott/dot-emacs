@@ -1,5 +1,10 @@
 (eval-when-compile (require 'cl))
 
+(defvar *pidfile* "emacs-server.pid")
+(defvar *emacs-load-start* (current-time))
+(defvar *emacs-root* (file-name-directory (or load-file-name buffer-file-name)))
+(defvar user-name (getenv "USER"))
+
 (defun homedir+ (path)
   "Return absolute path to users home directory based on environment variables"
   (format "%s/%s" (getenv "HOME") path))
@@ -8,23 +13,16 @@
   "Create an bsolute path to ~/.emacs.d/``path``"
   (format "%s/.emacs.d/%s" (getenv "HOME") path))
 
-(defvar emacs-root (file-name-directory (or load-file-name buffer-file-name)))
 (defun dotdir+ (path)
   "Return an absolute path to DOT-EMACS directory"
-  (format "%s%s" emacs-root path))
-
-  
-
-(defvar *pidfile* "emacs-server.pid")
-(defvar *emacs-load-start* (current-time))
-(defvar user-name (getenv "USER"))
+  (format "%s%s" *emacs-root* path))
 
 (defvar autosave-dir (emacsdir+ "auto-save-list"))
 
 (mapc
  (lambda (pathdir)
     (add-to-list 'load-path pathdir))
- '((emacsdir+ "elpa") emacs-root ))
+ '((emacsdir+ "elpa") *emacs-root* ))
 
 ;; emacs < 24 doesnt have packages functionality, load this in instead
 (if (< (string-to-number emacs-version) 24)
@@ -71,11 +69,11 @@
               no-easy-keys
 	      helm  helm-pydoc helm-delicious yas-jit ;helm-spotify
               ac-slime ac-nrepl ac-ispell ac-helm ac-etags
-              starter-kit-js smartparens))
+              starter-kit-js smartparens rainbow-mode wanderlust))
 
 
 (dolist (e '("external/troels"  "functions"))
-  (load (concat emacs-root e)))
+  (load (concat *emacs-root* e)))
 
 ;; load everything under these two directories
 (mapc
@@ -107,8 +105,8 @@
                                   obsolete noruntime cl-functions
                                   interactive-only))
 
-;; compile everything below EMACS-ROOT
-(byte-recompile-directory (file-name-directory emacs-root))
+;; compile everything below *EMACS-ROOT*
+(byte-recompile-directory (file-name-directory *emacs-root*))
 
 (display-time)
 
