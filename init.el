@@ -56,7 +56,7 @@
               flymake-jslint flymake-python-pyflakes groovy-mode
 	      highlight-parentheses icicles json-mode logito lua-mode
 	      magit markdown-mode ;mmm-mode
-              paredit pcache
+              paredit pcache projectile
 	      ;popup psgml
               ;; elisp/lisp things namespaces
               s slime ein

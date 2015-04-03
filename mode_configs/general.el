@@ -32,10 +32,17 @@
 (namespace general
 	   :use [cl uniquify]
 	   :export []
-	   :packages [yasnippet ido sr-speedbar bug-reference-github])
+	   :packages [yasnippet ido sr-speedbar bug-reference-github
+                                projectile])
 
 (require 'no-easy-keys)
 (no-easy-keys 1)
+
+(projectile-global-mode)
+(setq projectile-indexing-method 'native)
+(setq projectile-enable-caching t)
+(setq projectile-file-exists-remote-cache-expire (* 10 60))
+
 
 ;; setup auto-complete stuff.  
 (require 'auto-complete-config)
