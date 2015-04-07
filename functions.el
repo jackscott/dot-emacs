@@ -1,6 +1,6 @@
 ;;; dot-emacs/functions.el --- collection of functions and macros
 ;;
-;; Copyright (C) 2013  Jack Scott (js@nine78.com)
+;; Copyright (C) 2013-2015  Jack Scott (js@nine78.com)
 ;;
 ;; Authors:  Jack Scott (js@nine78.com)
 ;; Created:  24 March 2013
@@ -62,28 +62,9 @@
   (if (and (looking-at "$") (not (looking-back "^\\s-*")))
       (hippie-expand nil))
   (indent-for-tab-command))
+
 (add-hook 'find-file-hooks (function (lambda ()
                                        (local-set-key (kbd "<tab>") 'indent-or-complete))))
-
-(defun php-lint ()
-  "Performs a PHP lint-check on the current file."
-  (interactive)
-  (shell-command (concat "php -n -l " (buffer-file-name))))
-
-(defun jslint-thisfile ()
-  (interactive)
-  (compile (format "jsl -process %s" (buffer-file-name))))
-
-(defun mypylint ()
-  "Performs pylint on the current file, will try to look for a pylint.rc file"
-  (interactive)
-  (let ((h (getenv "HOME"))
-        (cmd (s-trim (shell-command-to-string "/usr/bin/which pylint")))
-        ;(cmd "/usr/local/share/python/pylint -E")
-        (f "/repos/yieldbot/pylint.rc"))
-    (if (file-exists-p (concat h f))
-        (compile (format "%s -E --rcfile=%s %s" cmd (concat h f) (buffer-file-name)))
-      (compile (format "%s -E %s" cmd (buffer-file-name))))))
 
 (defun scroll-down-keep-cursor ()
    ;; Scroll the text one line down while keeping the cursor
