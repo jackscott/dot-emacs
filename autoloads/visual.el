@@ -91,8 +91,6 @@
 (setq theme-current my-color-themes)
 (my-theme-set-default)
 
-
-
 (setf pop-up-windows nil        ; Don't change my windowconfiguration.
       european-calendar-style t         ; Use european date format.
       delete-auto-save-files t   ; Delete unnecessary auto-save files.
@@ -134,6 +132,6 @@
 ;; cycle through color themes
 (global-set-key [f12] 'my-theme-cycle)
 (global-set-key (kbd "M-<return>") 'toggle-fullscreen)
-
+(color-theme-dark-laptop)
 (toggle-fullscreen)
 ;(sr-speedbar-open)
