@@ -7,33 +7,52 @@
                                        clojure-mode-extra-font-locking
                                        clj-refactor
                                        smartparens
+                                       ac-cider
                                        ;midje-mode
                                        ;midje-test-mode
                                        ;clojure-jump-to-file
                                        ])
-;; handle CamelCase shit in java
-(add-hook 'clojure-mode-hook 'subword-mode)
-(add-hook 'clojure-mode-hook 'paredit-mode)
-(add-hook 'clojure-mode-hook 'smartparens-strict-mode)
+(setq nrepl-log-messages t)
+(setq nrepl-buffer-name-separator "-")
+(setq cider-repl-tab-command 'indent-for-tab-command)
+(setq cider-repl-history-file (emacsdir+ "cider-repl.clj"))
+;; (setq cider-show-error-buffer 'only-in-repl)
 
-;; docs are good
-(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+;; (setq cider-prompt-save-file-on-load nil)
+;; (setq cider-repl-result-prefix ";; => ")
+
+(defun my-clojure-hook ()
+  (subword-mode)
+  (paredit-mode)
+  (smartparens-strict-mode)
+  (rainbow-delimiters-mode))
+
+;; handle CamelCase shit in java
+(add-hook 'clojure-mode-hook 'my-clojure-hook)
 
 ;; ;; Set a bunch of truths 
-(funcs/set-list-items '(nrepl-log-message nrepl-hide-special-buffers
-                                          cider-prefer-local-resources
-                                          cider-repl-pop-to-buffer-on-connect
-                                          cider-repl-wrap-history)
+(funcs/set-list-items '(nrepl-hide-special-buffers
+                        cider-prefer-local-resources
+                        cider-repl-pop-to-buffer-on-connect
+                        cider-repl-wrap-history)
                       t)
 
-(setq cider-repl-tab-command 'indent-for-tab-command)
+(eval-after-load 'cider
+  '(progn
 
-(setq cider-show-error-buffer 'only-in-repl)
-(setq nrepl-buffer-name-separator "-")
-(setq cider-prompt-save-file-on-load nil)
-(setq cider-repl-result-prefix ";; => ")
+     (add-hook 'cider-mode-hook 'ac-flyspell-workaround)
+     (add-hook 'cider-mode-hook 'ac-cider-setup)
+     (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+     (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)))
 
-(setq cider-repl-history-file (emacsdir+ "cider-repl.clj"))
-(add-hook 'cider-repl-mode-hook 'subword-mode)
-(add-hook 'cider-repl-mode-hook 'paredit-mode)
-(add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
+(defun my-cider-hook ()
+  (my-clojure-hook)
+  (ac-cider-setup))
+
+(add-hook 'cider-repl-mode-hook 'my-clojure-hook)
+
+(eval-after-load "auto-complete"
+  '(progn
+     (add-to-list 'ac-modes 'cider-mode)
+     (add-to-list 'ac-modes 'cider-repl-mode)
+     (add-to-list 'ac-modes 'clojure-mode)))
