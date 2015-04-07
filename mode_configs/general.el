@@ -1,6 +1,6 @@
 ;;; dot-emacs/mode_config/general.el --- general settings
 ;;
-;; Copyright (C) 2013  Jack Scott (js@nine78.com)
+;; Copyright (C) 2013-2015  Jack Scott (js@nine78.com)
 ;;
 ;; Authors:  Jack Scott (js@nine78.com)
 ;; Created:  24 March 2013
@@ -33,16 +33,24 @@
 	   :use [cl uniquify]
 	   :export []
 	   :packages [yasnippet ido sr-speedbar bug-reference-github
-                                projectile])
+                                projectile rainbow-delimiters-mode
+                                company-mode magit-gh-pulls])
 
 (require 'no-easy-keys)
 (no-easy-keys 1)
 
-(projectile-global-mode)
+
 (setq projectile-indexing-method 'native)
 (setq projectile-enable-caching t)
 (setq projectile-file-exists-remote-cache-expire (* 10 60))
 
+(defun global-init-hook ()
+  (global-company-mode)
+  (projectile-global-mode)
+  (yas-global-mode)
+  (ido-mode))
+
+(add-hook 'after-init-hook 'global-init-hook)
 
 ;; setup auto-complete stuff.  
 (require 'auto-complete-config)
@@ -51,48 +59,19 @@
 (setq-default ac-sources (add-to-list 'ac-sources 'ac-source-dictionary))
 (global-auto-complete-mode t)
 (setq ac-auto-start 2 ac-ignore-case nil)
-
-
-;; yasnippet
-(yas-global-mode 1)
 (add-to-list 'ac-sources 'ac-source-yasnippet)
 
-
-;; git configuration
-(with-feature 'vc-git
-  (add-to-list 'vc-handled-backends 'git))
-
-(autoload 'git-blame-mode "git-blame"
-           "Minor mode for incremental blame for Git." t)
-
-;; Apache mdoe
-(with-feature 'apache-mode
-  (add-to-list 'auto-mode-alist '("commonapache[12]\?\\.conf$" . apache-mode))
-  (add-to-list 'auto-mode-alist '("^.+\/vhosts\.d\/.+\.conf$" . apache-mode))
-  (add-to-list 'auto-mode-alist '("^.+\/modules\.d\/.+\.conf$" . apache-mode))
-  (add-to-list 'auto-mode-alist '("\\.htaccess\\|\\httpd\\.conf\\|\\access\\.conf\\|\\apache[12]\?\\.conf" . apache-mode)))
-
+(defun global-magit-hook ()
+  (magit-filenotify-mode)
+  (turn-on-magit-gh-pulls))
+(add-hook 'magit-mode-hook 'global-magit-hook)
 
 (setq uniquify-buffer-name-style 'forward)
 (setq uniquify-separator "/")
 (setq uniquify-after-kill-buffer-p t)
 (setq uniquify-ignore-buffers-re "^\\*")
 
-(ido-mode t)
-
-(when (require 'autopair nil t)
-  (setq autopair-mode t))
-
-
-;; (setq-default abbrev-mode t)
-;; (setq abbrev-file-name (emacsdir+ "abbrev_defs.txt"))
-;; (define-abbrev-table 'global-abbrev-table
-;;   '(("afaict" "as far as I can tell" nil 1)
-;;     ("omuse" "http://www.emacswiki.org/cgi-bin/oddmuse.pl" nil 0)
-;;     ("btw" "by the way" nil 3)
-;;     ("wether" "whether" nil 5)
-;;     ("ewiki" "http://www.emacswiki.org/cgi-bin/wiki.pl" nil 3)
-;;     ("pov" "point of view" nil Make)
-;;     ))
-
-(add-hook 'prog-mode-hook 'bug-reference-github-set-url-format)
+(defun global-prog-mode-hook ()
+  (rainbow-delimiters-mode)
+  (bug-reference-github-set-url-format))
+(add-hook 'prog-mode-hook 'global-prog-mode-hook)

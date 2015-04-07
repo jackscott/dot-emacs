@@ -106,7 +106,7 @@
                                   interactive-only))
 
 ;; compile everything below *EMACS-ROOT*
-(byte-recompile-directory (file-name-directory *emacs-root*))
+(byte-recompile-directory *emacs-root*)
 
 (display-time)
 
