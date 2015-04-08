@@ -33,8 +33,8 @@
 	   :use [cl uniquify]
 	   :export []
 	   :packages [yasnippet ido sr-speedbar bug-reference-github
-                                projectile rainbow-delimiters-mode
-                                company-mode magit-gh-pulls])
+                                projectile rainbow-delimiters
+                                company ])
 
 (require 'no-easy-keys)
 (no-easy-keys 1)
@@ -44,11 +44,12 @@
 (setq projectile-enable-caching t)
 (setq projectile-file-exists-remote-cache-expire (* 10 60))
 
+
 (defun global-init-hook ()
-  (global-company-mode)
-  (projectile-global-mode)
-  (yas-global-mode)
-  (ido-mode))
+  (global-company-mode 1)
+  (projectile-global-mode 1)
+  (yas-global-mode 1)
+  (ido-mode 1))
 
 (add-hook 'after-init-hook 'global-init-hook)
 
@@ -61,15 +62,15 @@
 (setq ac-auto-start 2 ac-ignore-case nil)
 (add-to-list 'ac-sources 'ac-source-yasnippet)
 
-(defun global-magit-hook ()
-  (magit-filenotify-mode)
-  (turn-on-magit-gh-pulls))
-(add-hook 'magit-mode-hook 'global-magit-hook)
+;; Magit stuff
+(setq magit-auto-revert-mode nil
+      magit-last-seen-setup-instructions "1.4.0")
 
-(setq uniquify-buffer-name-style 'forward)
-(setq uniquify-separator "/")
-(setq uniquify-after-kill-buffer-p t)
-(setq uniquify-ignore-buffers-re "^\\*")
+;; I like uniquify but not vanilla
+(setq uniquify-buffer-name-style 'forward
+      uniquify-separator "/"
+      uniquify-after-kill-buffer-p t
+      uniquify-ignore-buffers-re "^\\*")
 
 (defun global-prog-mode-hook ()
   (rainbow-delimiters-mode)
