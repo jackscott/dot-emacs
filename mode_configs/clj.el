@@ -2,44 +2,46 @@
 (require 'cider)
 (namespace clj
 	   :import [funcs]
-	   :packages [starter-kit-lisp clojure-mode
-                                       bug-reference-github
-                                       clojure-mode-extra-font-locking
-                                       clj-refactor
-                                       smartparens
-                                       ac-cider
-                                       ;midje-mode
+	   :packages [starter-kit-lisp
+                      clojure-mode
+                      cider
+                      better-defaults
+                      rainbow-delimiters
+                      bug-reference-github
+                      clojure-mode-extra-font-locking
+                      clj-refactor
+                      smartparens
+                      ac-cider
+                      
+                                        ;midje-mode
                                        ;midje-test-mode
                                        ;clojure-jump-to-file
-                                       ])
-(setq nrepl-log-messages t)
+                      ])
+;; ;; Set a bunch of truths 
+(funcs/set-list-items '(nrepl-hide-special-buffers
+                        cider-prefer-local-resources
+                        cider-repl-pop-to-buffer-on-connect
+                        cider-repl-wrap-history
+                        nrepl-log-messages)
+                      t)
+
 (setq nrepl-buffer-name-separator "-")
 (setq cider-repl-tab-command 'indent-for-tab-command)
 (setq cider-repl-history-file (emacsdir+ "cider-repl.clj"))
 ;; (setq cider-show-error-buffer 'only-in-repl)
 
-;; (setq cider-prompt-save-file-on-load nil)
-;; (setq cider-repl-result-prefix ";; => ")
+(setq cider-prompt-save-file-on-load nil)
+(setq cider-repl-result-prefix ";; => ")
 
-(defun my-clojure-hook ()
-  (subword-mode)
-  (paredit-mode)
-  (smartparens-strict-mode)
-  (rainbow-delimiters-mode))
+(add-hook 'clojure-mode-hook '(lambda ()
+                               (subword-mode)
+                               (paredit-mode)
+                               (smartparens-strict-mode)
+                               (rainbow-delimiters-mode)))
 
-;; handle CamelCase shit in java
-(add-hook 'clojure-mode-hook 'my-clojure-hook)
-
-;; ;; Set a bunch of truths 
-(funcs/set-list-items '(nrepl-hide-special-buffers
-                        cider-prefer-local-resources
-                        cider-repl-pop-to-buffer-on-connect
-                        cider-repl-wrap-history)
-                      t)
 
 (eval-after-load 'cider
   '(progn
-
      (add-hook 'cider-mode-hook 'ac-flyspell-workaround)
      (add-hook 'cider-mode-hook 'ac-cider-setup)
      (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)

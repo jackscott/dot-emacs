@@ -46,7 +46,7 @@
     (if (not (package-installed-p pkgname))
 	(package-install pkgname)))
 
- '( clojure-mode cider better-defaults rainbow-delimiters
+ '( 
               auto-complete bash-completion bookmark+ align-cljlet
 
               color-theme color-theme-approximate
