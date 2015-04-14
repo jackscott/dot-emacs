@@ -35,6 +35,11 @@
 	   :packages [yasnippet ido sr-speedbar bug-reference-github
                                 projectile rainbow-delimiters
                                 company ])
+(require 'smartparens-config)
+
+
+;; highlights matching pairs
+
 
 (require 'no-easy-keys)
 (no-easy-keys 1)
@@ -74,5 +79,7 @@
 
 (defun global-prog-mode-hook ()
   (rainbow-delimiters-mode)
-  (bug-reference-github-set-url-format))
+  (bug-reference-github-set-url-format)
+  (smartparens-global-mode t)
+  (show-smartparens-global-mode t))
 (add-hook 'prog-mode-hook 'global-prog-mode-hook)
