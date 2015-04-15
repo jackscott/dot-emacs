@@ -25,7 +25,7 @@
 ;; MA 02111-1307 USA
 
 
-;; https://github.com/jscott/dot-emacs
+;; https://github.com/jackscott/dot-emacs
 (eval-when-compile (require'cl))
 (require 'namespaces)
 
@@ -36,19 +36,12 @@
                                 projectile rainbow-delimiters
                                 company ])
 (require 'smartparens-config)
-
-
-;; highlights matching pairs
-
-
 (require 'no-easy-keys)
 (no-easy-keys 1)
-
 
 (setq projectile-indexing-method 'native)
 (setq projectile-enable-caching t)
 (setq projectile-file-exists-remote-cache-expire (* 10 60))
-
 
 (defun global-init-hook ()
   (global-company-mode 1)
@@ -77,9 +70,24 @@
       uniquify-after-kill-buffer-p t
       uniquify-ignore-buffers-re "^\\*")
 
+;"Rebind <RET> key to do automatic indentation in certain modes (not haskell-mode)."
+;<http://www.metasyntax.net/unix/dot-emacs.html>
+(defun auto-indent ()
+  (let ((modes '(ada-mode c-mode c++-mode cperl-mode emacs-lisp-mode
+                          java-mode html-mode lisp-mode perl-mode
+                          php-mode prolog-mode ruby-mode scheme-mode
+                          sgml-mode sh-mode sml-mode tuareg-mode python-mode))
+        (mode-hook (lambda (mode) (intern (concat (symbol-name mode) "-hook"))))
+        (myfn (lambda (mode)
+                (add-hook (mode-hook mode)
+                          (lambda nil (local-set-key (kbd "RET") 'newline-and-indent))))))
+    (mapc myfn modes)))
+
+;; these will be enabled in all prog-mode descendant modes
 (defun global-prog-mode-hook ()
   (rainbow-delimiters-mode)
   (bug-reference-github-set-url-format)
   (smartparens-global-mode t)
   (show-smartparens-global-mode t))
+
 (add-hook 'prog-mode-hook 'global-prog-mode-hook)

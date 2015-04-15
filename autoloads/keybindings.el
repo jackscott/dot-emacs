@@ -1,8 +1,8 @@
 ;;; dot-emacs/keybindings.el --- all my keybindings
 ;;
-;; Copyright (C) 2013  Jack Scott (js@nine78.com)
+;; Copyright (C) 2013-2015  Jack Scott (emacspinky@gmail.com)
 ;;
-;; Authors:  Jack Scott (js@nine78.com)
+;; Authors:  Jack Scott (emacspinky@gmail.com)
 ;; Created:  24 March 2013
 ;; License:  GPL
 ;;
@@ -24,7 +24,7 @@
 ;; Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
 ;; MA 02111-1307 USA
 
-;; https://github.com/jscott/dot-emacs
+;; https://github.com/jackscott/dot-emacs
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -35,13 +35,6 @@
 (namespace keys
 	   :import [funcs visual])
 
-(defn mychmod()
-  "Performs a chmod & chown on the current file."
-  (interactive)
-  (shell-command (format "sudo chown :users %s && sudo chmod 775 %s" (buffer-file-name buffer-file-name)))
-  ;;(shell-command (concat "sudo chmod 775 " (buffer-file-name)))
-  (myrefresh))
-
 ;;
 (defn myrefresh()
   "Reloads the file from disk"
@@ -51,26 +44,20 @@
 
 (global-set-keys 
  "\M-`"         'shell
- "\C-xh"        (~ funcs/mychmod)
  "\C-xr"        (~ funcs/myrefresh)
  "\C-xl"        'goto-line
  "\C-w"         'backward-kill-word
  "\C-x\C-k"     'kill-region
-  "\C-xw"        'goto-line
  "\C-x\C-b"     'buffer-menu
  "\C-cn"        'bs-cycle-next
  "\C-cp"        'bs-cycle-previous
- "\C-ce"        'eshell
- "\C-c\C-e"     'eshell
  "\C-ck"        'compile
  "\C-x!"        'shell-command
  "\C- "         'set-mark-command
  "\M-x"         'execute-extended-command
  "\M-c"         'capitalize-word
-
  "\C-\M-z"      'undo
  "\C-s"         'isearch-forward
- "\C-xp"        'mypylint
  "\C-x\C-e"     'eval-region
  "\C-cg"        'magit-status
  
@@ -117,12 +104,3 @@
 ;; (define-key Apropos-Prefix (kbd "v")   'apropos-variable)
 ;; (define-key Apropos-Prefix (kbd "C-v") 'apropos-value)
 
-;"Rebind <RET> key to do automatic indentation in certain modes (not haskell-mode)."
-;<http://www.metasyntax.net/unix/dot-emacs.html>
-(mapc
- (lambda (mode)
-   (let ((mode-hook (intern (concat (symbol-name mode) "-hook"))))
-     (add-hook mode-hook (lambda nil (local-set-key (kbd "RET") 'newline-and-indent)))))
- '(ada-mode c-mode c++-mode cperl-mode emacs-lisp-mode java-mode html-mode
-            lisp-mode perl-mode php-mode prolog-mode ruby-mode scheme-mode
-            sgml-mode sh-mode sml-mode tuareg-mode python-mode))
