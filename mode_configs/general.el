@@ -31,25 +31,28 @@
 
 (namespace general
 	   :use [cl uniquify]
+           :import [funcs]
 	   :export []
 	   :packages [yasnippet ido sr-speedbar bug-reference-github
                                 projectile rainbow-delimiters
-                                company ])
+                                company window-numbering
+                                ])
 (require 'smartparens-config)
 (require 'no-easy-keys)
-(no-easy-keys 1)
 
 (setq projectile-indexing-method 'native)
 (setq projectile-enable-caching t)
 (setq projectile-file-exists-remote-cache-expire (* 10 60))
 
-(defun global-init-hook ()
-  (global-company-mode 1)
-  (projectile-global-mode 1)
-  (yas-global-mode 1)
-  (ido-mode 1))
-
-(add-hook 'after-init-hook 'global-init-hook)
+;; activate a bunch of modes and things
+(funcs/set-list-items '(global-company-mode
+                        projectile-global-mode
+                        yas-global-mode
+                        ido-mode
+                        no-easy-keys
+                        window-numbering-mode
+                        winner-mode)
+                      1)
 
 ;; setup auto-complete stuff.  
 (require 'auto-complete-config)
@@ -59,6 +62,8 @@
 (global-auto-complete-mode t)
 (setq ac-auto-start 2 ac-ignore-case nil)
 (add-to-list 'ac-sources 'ac-source-yasnippet)
+
+
 
 ;; Magit stuff
 (setq magit-auto-revert-mode nil
