@@ -33,8 +33,10 @@
 ;;
 (require 'namespaces)
 (namespace keys
-	   :import [funcs visual])
+  :import [funcs visual]
+  :packages [browse-at-remote])
 
+;;(global-set-key (kbd "C-c ") 'browse-at-remote)
 ;;
 (defn myrefresh()
   "Reloads the file from disk"
