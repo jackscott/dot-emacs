@@ -37,13 +37,8 @@
   :packages [browse-at-remote])
 
 ;;(global-set-key (kbd "C-c ") 'browse-at-remote)
-;;
-(defn myrefresh()
-  "Reloads the file from disk"
-  (interactive)
-  (revert-buffer t t)
-  (message (format "Reloaded %s from disk" (buffer-file-name))))
 
+;; 
 (global-set-keys 
  "\M-`"         'shell
  "\C-xr"        (~ funcs/myrefresh)
@@ -60,13 +55,20 @@
  "\M-c"         'capitalize-word
  "\C-\M-z"      'undo
  "\C-s"         'isearch-forward
- "\C-x\C-e"     'eval-region
+ "\C-xe"        'eval-region
  "\C-cg"        'magit-status
- 
  "\C-c\C-o"     'slime-close-all-parens-in-sexp
  "\C-c\C-p"     'paredit-open-round
  "\C-f"		'right-char
-)
+ "\M-n" 'forward-paragraph
+ "\M-p" 'backward-paragraph
+ 
+ ;Add alternatives to M-x, on the recommendation of Steve Yegge.
+ ;<http://steve.yegge.googlepages.com/effective-emacs>
+ "\C-x\C-m" 'execute-extended-command
+ "\C-c\C-m" 'execute-extended-command
+
+ "\C-x]" 'slime-close-all-parens-in-sexp)
 
 (define-key isearch-mode-map "\C-s" 'isearch-repeat-forward)
 
@@ -77,11 +79,12 @@
 (defun up-slightly ()   (interactive) (scroll-up 1))
 (defun down-slightly () (interactive) (scroll-down 1))
 
-(global-set-key "\M-n" 'forward-paragraph)
-(global-set-key "\M-p" 'backward-paragraph)
+(global-set-key [mouse-5] '(lambda () (interactive) (scroll-up 1)))
+(global-set-key [mouse-6] '(lambda  () (interactive) (scroll-down 1)))
 
-(global-set-key [mouse-5] 'up-slightly )
-(global-set-key [mouse-6] 'down-slightly )
+;; (global-set-key "\M-n" 'forward-paragraph)
+;; (global-set-key "\M-p" 'backward-paragraph)
+
 ;; for some reason this is necessary for the mac
 (global-set-key [mouse-4] 'down-slightly )
 
@@ -90,10 +93,12 @@
 
 ;Add alternatives to M-x, on the recommendation of Steve Yegge.
 ;<http://steve.yegge.googlepages.com/effective-emacs>
-(global-set-key "\C-x\C-m" 'execute-extended-command)
-(global-set-key "\C-c\C-m" 'execute-extended-command)
+;; (global-set-key "\C-x\C-m" 'execute-extended-command)
+;; (global-set-key "\C-c\C-m" 'execute-extended-command)
+
 ;;(global-set-key "\C-x\C-c" 'save-buffers-kill-emacs)
-(global-set-key "\C-x]" 'slime-close-all-parens-in-sexp)
+;;(global-set-key "\C-x]" 'slime-close-all-parens-in-sexp)
+
 
 ;; (define-prefix-command 'Apropos-Prefix nil "Apropos (a,c,d,i,l,v,C-v)")
 ;; (global-set-key (kbd "C-h C-a") 'Apropos-Prefix)
