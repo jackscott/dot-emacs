@@ -40,36 +40,53 @@
 
 (package-initialize)
 
+
 ;; Load in packages
 (mapc
  (lambda (pkgname)
     (if (not (package-installed-p pkgname))
 	(package-install pkgname)))
+ '(s
+   auto-complete
+   bash-completion
+   bookmark+
+   
+   concurrent
+   ctable
+   dash
+   deferred
+   epc
+   find-things-fast
+   flymake-easy
+   
+   groovy-mode
+   highlight-parentheses
+   icicles
+   
+   logito
+   lua-mode
+   magit
+   markdown-mode
+   paredit
+   pcache
+   projectile
 
- '( 
-              auto-complete bash-completion bookmark+ align-cljlet
-
-              color-theme color-theme-approximate
-	      color-theme-solarized color-theme-tango concurrent
-	      ctable dash deferred epc find-things-fast flymake-easy
-
-              flymake-jslint flymake-python-pyflakes groovy-mode
-	      highlight-parentheses icicles json-mode logito lua-mode
-	      magit markdown-mode ;mmm-mode
-              paredit pcache projectile
-	      ;popup psgml
-              ;; elisp/lisp things namespaces
-              s slime ein
-              ;; python
-              pyflakes pylint python-pep8 python-pylint virtualenvwrapper
-              jedi nose elpy
-
-              ;;other
-              tangotango-theme naquadah-theme gist
-              no-easy-keys
-	      helm  helm-pydoc helm-delicious yas-jit ;helm-spotify
-              ac-slime ac-nrepl ac-ispell ac-helm ac-etags
-              starter-kit-js smartparens rainbow-mode wanderlust))
+   ;;other
+   gist
+   no-easy-keys
+   helm
+   
+   helm-delicious
+   yas-jit
+   
+   
+   ac-ispell
+   ac-helm
+   ac-etags
+   
+   smartparens
+   rainbow-mode
+   wanderlust))
 
 
 (dolist (e '("external/troels"  "functions"))
@@ -106,7 +123,7 @@
                                   interactive-only))
 
 ;; compile everything below *EMACS-ROOT*
-(byte-recompile-directory *emacs-root*)
+(byte-recompile-directory '*emacs-root*)
 
 (display-time)
 

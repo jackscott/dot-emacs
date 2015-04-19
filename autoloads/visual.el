@@ -1,6 +1,6 @@
 ;;; dot-emacs/visual.el --- all my keybindings
 ;;
-;; Copyright (C) 2013  Jack Scott (js@nine78.com)
+;; Copyright (C) 2013-2015  Jack Scott (js@nine78.com)
 ;;
 ;; Authors:  Jack Scott (js@nine78.com)
 ;; Created:  24 March 2013
@@ -29,7 +29,17 @@
 (namespace visual
 	   :use [cl]
 	   :import [ funcs ]
-	   :packages [sr-speedbar color-theme])
+	   :packages [sr-speedbar
+                      color-theme
+                      color-theme
+                      color-theme-approximate
+                      color-theme-solarized
+                      color-theme-tango
+                      tangotango-theme
+                      naquadah-theme
+
+
+   ])
 
 (defun my-theme-set-default ()
   (interactive)

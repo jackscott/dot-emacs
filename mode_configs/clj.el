@@ -12,7 +12,9 @@
                       clj-refactor
                       smartparens
                       ac-cider
+                      align-cljlet
                       
+                      ac-nrepl
                                         ;midje-mode
                                        ;midje-test-mode
                                        ;clojure-jump-to-file

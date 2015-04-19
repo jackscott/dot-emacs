@@ -33,10 +33,16 @@
 	   :use [cl uniquify]
            :import [funcs]
 	   :export []
-	   :packages [yasnippet ido sr-speedbar bug-reference-github
-                                projectile rainbow-delimiters
-                                company window-numbering
-                                ])
+	   :packages [yasnippet
+                      ido
+                      sr-speedbar
+                      bug-reference-github
+                      projectile
+                      rainbow-delimiters
+                      company
+                      window-numbering])
+
+;;for some reason these dont work with :packages 
 (require 'smartparens-config)
 (require 'no-easy-keys)
 
