@@ -23,6 +23,8 @@
 ;; License along with this program; if not, write to the Free
 ;; Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
 ;; MA 02111-1307 USA
+(eval-when-compile (require 'jedi nil t))
+
 (require 'namespaces)
 (namespace mypy
 	   :import [funcs]
@@ -40,7 +42,6 @@
                       autopair
                       flymake-python-pyflakes])
 
-
 (add-to-list 'auto-mode-alist '("\\.py\\'\\|\\.wsgi\\'" . python-mode))
 
 (funcs/set-list-items '(py-force-py-shell-name-p
@@ -52,33 +53,21 @@
 			py-indent-honors-inline-comment)
 		      t)
 
-(setq py-load-python-mode-pymacs-p nil)
-;;(setq py-split-windows-on-execute-p nil)
-
-(setq interpreter-mode-alist
-      (cons '("python" . python-mode)
-            interpreter-mode-alist)
-      python-mode-hook
-      '(lambda () (progn
-               (set-variable 'py-indent-offset 4)
-               (set-variable 'py-smart-indentation t)
-               (set-variable 'indent-tabs-mode nil) )))
-
-
-(eval-when-compile (require 'jedi nil t))
-
-(add-hook 'python-mode-hook 'jedi:setup)
-(add-hook 'python-mode-hook 'jedi:ac-setup)
-
-
-(setq elpy-rpc-backend "jedi")
+(setq py-load-python-mode-pymacs-p nil
+      jedi:setup-keys t
+      jedi:complete-on-dot t
+      py-indent-offset 4
+      py-smart-indentation t
+      indent-tabs-mode nil
+      elpy-rpc-backend "jedi")
 
 (defn my-mode-hook ()
   '((autopair-mode +1)
     (elpy-enable)
     (elpy-clean-modeline)
-    (setq jedi:setup-keys t
-          jedi:complete-on-dot t)))
+    (jedi:setup)
+    (jedi:ac-setup)))
+
 (add-hook 'python-mode-hook 'my-mode-hook)
 
 (when (require 'ipython nil t)
