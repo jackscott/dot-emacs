@@ -36,6 +36,8 @@
                       nose
                       helm-pydoc
                       elpy
+                      electric-pair
+                      autopair
                       flymake-python-pyflakes])
 
 
@@ -64,37 +66,40 @@
 
 
 (eval-when-compile (require 'jedi nil t))
-(setq jedi:setup-keys t)
-(setq jedi:complete-on-dot t)
+
 (add-hook 'python-mode-hook 'jedi:setup)
 (add-hook 'python-mode-hook 'jedi:ac-setup)
 
-;; (when (require 'ipython nil t)
-;;   (setq-default py-shell-name "ipython")
-;;   (setq-default py-which-bufname "IPython")
-;;   (setq py-python-command-args '("--matplotlib" "--colors" "LightBG")))
+
+(setq elpy-rpc-backend "jedi")
+
+(defn my-mode-hook ()
+  '((autopair-mode +1)
+    (elpy-enable)
+    (elpy-clean-modeline)
+    (setq jedi:setup-keys t
+          jedi:complete-on-dot t)))
+(add-hook 'python-mode-hook 'my-mode-hook)
+
+(when (require 'ipython nil t)
+  (setq-default py-shell-name "ipython")
+  (setq-default py-which-bufname "IPython")
+  (setq py-python-command-args '("--matplotlib" "--colors" "LightBG")))
 
 ;; (setq ein:use-auto-complete t)
 ;; (setq ein:use-auto-complete-superpack t)
 ;; (setq ein:use-smartrep t))
 
-
-;; (require 'elpy)
-;; (setq elpy-rpc-backend "jedi")
-;; (elpy-enable)
-;; (elpy-clean-modeline)
-
-;; (require 'nose)
-;; (defun nosetests-all-virtualenv ()
-;;   (interactive)
-;;   (let ((nose-global-name
-;;          (format
-;;           "~/.virtualenvs/%s/bin/nosetests"
-;;           (car
-;;            (last
-;;             (delete
-;;              ""
-;;              (split-string
-;;               (nose-find-project-root)
-;;               "/")))))))
-;;     (nosetests-all)))
+(defn nosetests-all-virtualenv ()
+  (interactive)
+  (let ((nose-global-name
+         (format
+          "~/.virtualenvs/%s/bin/nosetests"
+          (car
+           (last
+            (delete
+             ""
+             (split-string
+              (nose-find-project-root)
+              "/")))))))
+    (nosetests-all)))
