@@ -104,3 +104,10 @@
 (defn set-list-items (thelist val)
   "Iterate THELIST calling (SET `key` VAL)"
   (mapc #'(lambda (x) (set x val)) thelist))
+
+(defun start-desktop ()
+  "Load up previous desktop and turn on autosaving"
+  (interactive)
+  (let ((desktop-load-locked-desktop "ask"))
+    (desktop-read)
+    (desktop-save-mode 1)))
