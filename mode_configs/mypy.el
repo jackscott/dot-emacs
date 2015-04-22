@@ -38,7 +38,6 @@
                       nose
                       helm-pydoc
                       elpy
-                      electric-pair
                       autopair
                       flymake-python-pyflakes])
 

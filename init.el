@@ -15,14 +15,15 @@
 
 (defun dotdir+ (path)
   "Return an absolute path to DOT-EMACS directory"
-  (format "%s%s" *emacs-root* path))
+  (let ((eroot (file-name-directory (or load-file-name buffer-file-name))))
+    (expand-file-name (file-name-sans-versions path) eroot)))
 
-(defvar autosave-dir (emacsdir+ "auto-save-list"))
 
 (mapc
  (lambda (pathdir)
     (add-to-list 'load-path pathdir))
- '((emacsdir+ "elpa") *emacs-root* ))
+ '((emacsdir+ "elpa")
+   *emacs-root*))
 
 ;; emacs < 24 doesnt have packages functionality, load this in instead
 (if (< (string-to-number emacs-version) 24)
@@ -89,8 +90,8 @@
    wanderlust))
 
 
-(dolist (e '("external/troels"  "functions"))
-  (load (concat *emacs-root* e)))
+(dolist (e '("external/troels"  "core/functions"))
+  (load (dotdir+ e)))
 
 ;; load everything under these two directories
 (mapc
@@ -108,14 +109,6 @@
 (add-to-list 'kill-emacs-query-functions
              (lambda () (y-or-n-p "Should Emacs really close? ")))
 
-;; change default indent level
-(setq c-default-style "bsd" c-basic-offset 4)
-
-;;default shell mode
-(setq shell-file-name (getenv "SHELL"))
-(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
-(autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
-(put 'upcase-region 'disabled nil)
 
 ;; ignore byte-compile warnings
 (setq byte-compile-warnings '(not nresolved free-vars callargs redefine
@@ -123,19 +116,5 @@
                                   interactive-only))
 
 ;; compile everything below *EMACS-ROOT*
-(byte-recompile-directory '*emacs-root*)
-
-(display-time)
-
-;; Enable mouse support
-(unless window-system
-  (require 'mouse)
-  (xterm-mouse-mode t)
-  (global-set-key [mouse-4] '(lambda ()
-			       (interactive)
-			       (scroll-down 1)))
-  (global-set-key [mouse-5] '(lambda ()
-			       (interactive)
-			       (scroll-up 1)))
-  (defun track-mouse (e))
-  (setq mouse-sel-mode t))
+(let ((dir (file-name-directory (or load-file-name buffer-file-name))))
+  (byte-recompile-directory dir))

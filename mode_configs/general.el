@@ -50,15 +50,6 @@
 (setq projectile-enable-caching t)
 (setq projectile-file-exists-remote-cache-expire (* 10 60))
 
-;; activate a bunch of modes and things
-(funcs/set-list-items '(global-company-mode
-                        projectile-global-mode
-                        yas-global-mode
-                        ido-mode
-                        no-easy-keys
-                        window-numbering-mode
-                        winner-mode)
-                      1)
 
 ;; setup auto-complete stuff.  
 (require 'auto-complete-config)

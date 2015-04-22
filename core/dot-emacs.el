@@ -51,7 +51,7 @@
 
 (namespace dot-emacs
   :use [cl]
-  :import [funcs]
+  :import []
   :packages [projectile])
 
 ;; sometimes :packages doesnt work
@@ -61,18 +61,8 @@
 (setq projectile-enable-caching t)
 (setq projectile-file-exists-remote-cache-expire (* 10 60))
 
-;; activate a bunch of modes and things
-(funcs/set-list-items '(global-company-mode
-                        projectile-global-mode
-                        yas-global-mode
-                        ido-mode
-                        no-easy-keys
-                        window-numbering-mode
-                        winner-mode)
-                      1)
 
-(def *emacs-root* )
-(def user-name (getenv "USER"))
+
 
 
 ;; add `~/.emacs.d/elpa'  to the load path
