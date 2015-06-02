@@ -60,14 +60,10 @@
  "\C-c\C-o"     'slime-close-all-parens-in-sexp
  "\C-c\C-p"     'paredit-open-round
  "\C-f"		'right-char
- "\M-n" 'forward-paragraph
- "\M-p" 'backward-paragraph
- 
  ;Add alternatives to M-x, on the recommendation of Steve Yegge.
  ;<http://steve.yegge.googlepages.com/effective-emacs>
  "\C-x\C-m" 'execute-extended-command
  "\C-c\C-m" 'execute-extended-command
-
  "\C-x]" 'slime-close-all-parens-in-sexp)
 
 (define-key isearch-mode-map "\C-s" 'isearch-repeat-forward)
@@ -82,32 +78,9 @@
 (global-set-key [mouse-5] '(lambda () (interactive) (scroll-up 1)))
 (global-set-key [mouse-6] '(lambda  () (interactive) (scroll-down 1)))
 
-;; (global-set-key "\M-n" 'forward-paragraph)
-;; (global-set-key "\M-p" 'backward-paragraph)
+(global-set-key "\M-n" 'forward-paragraph)
+(global-set-key "\M-p" 'backward-paragraph)
 
 ;; for some reason this is necessary for the mac
 (global-set-key [mouse-4] 'down-slightly )
-
 (global-set-key (kbd "<C-tab>") 'other-window)
-;;(global-set-key "\C-\M-z" 'undo)
-
-;Add alternatives to M-x, on the recommendation of Steve Yegge.
-;<http://steve.yegge.googlepages.com/effective-emacs>
-;; (global-set-key "\C-x\C-m" 'execute-extended-command)
-;; (global-set-key "\C-c\C-m" 'execute-extended-command)
-
-;;(global-set-key "\C-x\C-c" 'save-buffers-kill-emacs)
-;;(global-set-key "\C-x]" 'slime-close-all-parens-in-sexp)
-
-
-;; (define-prefix-command 'Apropos-Prefix nil "Apropos (a,c,d,i,l,v,C-v)")
-;; (global-set-key (kbd "C-h C-a") 'Apropos-Prefix)
-;; (define-key Apropos-Prefix (kbd "a")   'apropos)
-;; (define-key Apropos-Prefix (kbd "C-a") 'apropos)
-;; (define-key Apropos-Prefix (kbd "c")   'apropos-command)
-;; (define-key Apropos-Prefix (kbd "d")   'apropos-documentation)
-;; (define-key Apropos-Prefix (kbd "i")   'info-apropos)
-;; (define-key Apropos-Prefix (kbd "l")   'apropos-library)
-;; (define-key Apropos-Prefix (kbd "v")   'apropos-variable)
-;; (define-key Apropos-Prefix (kbd "C-v") 'apropos-value)
-

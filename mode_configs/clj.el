@@ -35,11 +35,13 @@
 (setq cider-prompt-save-file-on-load nil)
 (setq cider-repl-result-prefix ";; => ")
 
-(add-hook 'clojure-mode-hook '(lambda ()
-                               (subword-mode)
-                               (paredit-mode)
-                               (smartparens-strict-mode)
-                               (rainbow-delimiters-mode)))
+(defun my-clojure-hook ()
+  (subword-mode)
+  (paredit-mode)
+  (smartparens-strict-mode)
+  (rainbow-delimiters-mode))
+
+(add-hook 'clojure-mode-hook 'my-clojure-hook)
 
 
 (eval-after-load 'cider
@@ -53,7 +55,7 @@
   (my-clojure-hook)
   (ac-cider-setup))
 
-(add-hook 'cider-repl-mode-hook 'my-clojure-hook)
+(add-hook 'cider-repl-mode-hook 'my-cider-hook)
 
 (eval-after-load "auto-complete"
   '(progn
