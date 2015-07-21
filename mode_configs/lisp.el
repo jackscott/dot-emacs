@@ -1,9 +1,9 @@
 (require 'cl)
 ;; load in quicklisp if available
-(let ((f (expand-file-name "~/quicklisp/slime-helper.el")))
-  (lambda ()
-    (if (file-exists-p f)
-        (load f))))
+;; (let ((f (expand-file-name "~/quicklisp/slime-helper.el")))
+;;   (lambda ()
+;;     (if (file-exists-p f)
+;;         (load f))))
 
 ;; this should really check to see if sbcl is installed & get location
 (setq inferior-lisp-program "/usr/local/bin/sbcl")
