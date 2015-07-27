@@ -60,14 +60,13 @@
       indent-tabs-mode nil
       elpy-rpc-backend "jedi")
 
-(defn my-mode-hook ()
-  '((autopair-mode +1)
-    (elpy-enable)
-    (elpy-clean-modeline)
-    (jedi:setup)
-    (jedi:ac-setup)))
+(defun my-python-mode-hook ()
+  (autopair-mode 1)
+  (elpy-enable)
+  (jedi:setup)
+  (jedi:ac-setup))
 
-(add-hook 'python-mode-hook 'my-mode-hook)
+(add-hook 'python-mode-hook 'my-python-mode-hook)
 
 (when (require 'ipython nil t)
   (setq-default py-shell-name "ipython")
