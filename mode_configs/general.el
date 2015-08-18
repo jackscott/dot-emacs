@@ -40,7 +40,12 @@
                       projectile
                       rainbow-delimiters
                       company
-                      window-numbering])
+                      window-numbering
+                      helm-ag
+                      swiper
+                      swiper-helm
+                      yafolding])
+
 
 ;;for some reason these dont work with :packages 
 (require 'smartparens-config)
@@ -51,12 +56,18 @@
 (setq projectile-file-exists-remote-cache-expire (* 10 60))
 
 
+(require 'anzu)
+(global-anzu-mode +1)
+(global-set-key (kbd "M-%") 'anzu-query-replace)
+(global-set-key (kbd "C-M-%") 'anzu-query-replace-regexp)
+
 ;; setup auto-complete stuff.  
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories (emacsdir+ "ac-dict"))
 (ac-config-default)
 (setq-default ac-sources (add-to-list 'ac-sources 'ac-source-dictionary))
 (global-auto-complete-mode t)
+
 (setq ac-auto-start 2 ac-ignore-case nil)
 (add-to-list 'ac-sources 'ac-source-yasnippet)
 
@@ -65,6 +76,10 @@
 ;; Magit stuff
 (setq magit-auto-revert-mode nil
       magit-last-seen-setup-instructions "1.4.0")
+
+
+(require 'fullframe)
+(fullframe magit-status magit-mode-quit-window nil)
 
 ;; I like uniquify but not vanilla
 (setq uniquify-buffer-name-style 'forward
