@@ -8,17 +8,17 @@
 
 
 ;; activate a bunch of modes and things
-(funcs/set-list-items '(global-company-mode
-                        projectile-global-mode
-                        yas-global-mode
-                        ido-mode
-                        no-easy-keys
-                        window-numbering-mode
-                        winner-mode
-                        )
-                      1)
+(setq global-company-mode 1
+      projectile-global-mode 1
+      yas-global-mode 1
+      ido-mode 1
+      no-easy-keys 1
+      window-numbering-mode 1
+      winner-mode 1
+      global-auto-revert-mode 1)
 
 (display-time)
+(set-fringe-mode '(5 . 0))
 
 ;; Enable mouse support
 (unless window-system
