@@ -1,4 +1,6 @@
 (eval-when-compile (require 'cl))
+(require 'package)
+(setq package-enable-at-startup nil) ; To avoid initializing twice
 
 (defvar *pidfile* "emacs-server.pid")
 (defvar *emacs-load-start* (current-time))
@@ -87,7 +89,14 @@
    
    smartparens
    rainbow-mode
-   wanderlust))
+   wanderlust
+
+   ;; ruby shiz
+   inf-ruby
+   projectile
+   rspec-mode
+   fullframe
+   anzu))
 
 
 (dolist (e '("external/troels"  "core/functions"))
