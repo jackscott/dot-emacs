@@ -43,6 +43,11 @@
 
 (package-initialize)
 
+;; (defun read-lines (filePath)
+;;   "Return a list of lines of a file at filePath."
+;;   (with-temp-buffer
+;;     (insert-file-contents filePath)
+;;     (split-string (buffer-string) "\n" t)))
 
 ;; Load in packages
 (mapc
@@ -50,53 +55,42 @@
     (if (not (package-installed-p pkgname))
 	(package-install pkgname)))
  '(s
-   auto-complete
-   bash-completion
-   bookmark+
-   
-   concurrent
-   ctable
-   dash
-   deferred
-   epc
-   find-things-fast
-   flymake-easy
-   
-   groovy-mode
-   highlight-parentheses
-   icicles
-   
-   logito
-   lua-mode
-   magit
-   markdown-mode
-   paredit
-   pcache
-   projectile
-
-   ;;other
-   gist
-   no-easy-keys
-   helm
-   
-   helm-delicious
-   yas-jit
-   
-   
-   ac-ispell
-   ac-helm
-   ac-etags
-   
-   smartparens
-   rainbow-mode
-   wanderlust
-
-   ;; ruby shiz
-   inf-ruby
-   projectile
-   rspec-mode
-   fullframe
-   anzu))
+auto-complete
+bash-completion
+bookmark+
+concurrent
+ctable
+dash
+deferred
+epc
+find-things-fast
+flymake-easy
+groovy-mode
+highlight-parentheses
+icicles
+logito
+lua-mode
+magit
+markdown-mode
+paredit
+pcache
+projectile
+gist
+no-easy-keys
+helm
+helm-delicious
+yas-jit
+ac-ispell
+ac-helm
+ac-etags
+smartparens
+rainbow-mode
+wanderlust
+inf-ruby
+projectile
+rspec-mode
+fullframe
+anzu))
 
 
 (dolist (e '("external/troels"  "core/functions"))
