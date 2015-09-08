@@ -53,9 +53,9 @@
 		      t)
 
 (setq py-load-python-mode-pymacs-p nil
-      jedi:setup-keys t
-      jedi:complete-on-dot t
-      py-indent-offset 4
+      ;; jedi:setup-keys t
+      ;; jedi:complete-on-dot t
+      py-indent-offset 2
       py-smart-indentation t
       indent-tabs-mode nil
       elpy-rpc-backend "jedi")
@@ -63,8 +63,9 @@
 (defun my-python-mode-hook ()
   (autopair-mode 1)
   (elpy-enable)
-  (jedi:setup)
-  (jedi:ac-setup))
+  ;; (jedi:setup)
+  ;; (jedi:ac-setup)
+  )
 
 (add-hook 'python-mode-hook 'my-python-mode-hook)
 
