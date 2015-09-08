@@ -100,11 +100,17 @@
                           (lambda nil (local-set-key (kbd "RET") 'newline-and-indent))))))
     (mapc myfn modes)))
 
+
 ;; these will be enabled in all prog-mode descendant modes
 (defun global-prog-mode-hook ()
   (rainbow-delimiters-mode)
   (bug-reference-github-set-url-format)
   (smartparens-global-mode t)
+  (flyspell-prog-mode)
   (show-smartparens-global-mode t))
+
+(when (executable-find "hunspell")
+  (setq-default ispell-program-name "hunspell")
+  (setq ispell-really-hunspell t))
 
 (add-hook 'prog-mode-hook 'global-prog-mode-hook)

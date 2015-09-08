@@ -55,42 +55,48 @@
     (if (not (package-installed-p pkgname))
 	(package-install pkgname)))
  '(s
-auto-complete
-bash-completion
-bookmark+
-concurrent
-ctable
-dash
-deferred
-epc
-find-things-fast
-flymake-easy
-groovy-mode
-highlight-parentheses
-icicles
-logito
-lua-mode
-magit
-markdown-mode
-paredit
-pcache
-projectile
-gist
-no-easy-keys
-helm
-helm-delicious
-yas-jit
-ac-ispell
-ac-helm
-ac-etags
-smartparens
-rainbow-mode
-wanderlust
-inf-ruby
-projectile
-rspec-mode
-fullframe
-anzu))
+
+   auto-complete
+   bash-completion
+   bookmark+
+   
+   concurrent
+   ctable
+   dash
+   deferred
+   epc
+   find-things-fast
+   flymake-easy
+   
+   groovy-mode
+   highlight-parentheses
+   icicles
+   
+   logito
+   lua-mode
+   magit
+   markdown-mode
+   paredit
+   pcache
+   projectile
+
+   ;;other
+   gist
+   no-easy-keys
+   helm
+   
+   helm-delicious
+   yas-jit
+   
+   
+   ac-ispell
+   ac-helm
+   ac-etags
+   langtool
+   
+   smartparens
+   rainbow-mode
+   wanderlust))
 
 
 (dolist (e '("external/troels"  "core/functions"))
