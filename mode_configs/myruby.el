@@ -68,3 +68,6 @@
             (yard-mode)
             (eldoc-mode)
             (modify-syntax-entry ?: "."))) ;; Adds ":" to the word definition
+
+;; ;; Start projectile-rails
+;; (add-hook 'projectile-mode-hook 'projectile-rails-on)
