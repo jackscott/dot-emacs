@@ -121,3 +121,12 @@
   (setq ispell-really-hunspell t))
 
 (add-hook 'prog-mode-hook 'global-prog-mode-hook)
+
+
+;; disable the popup window when committing.
+;; https://github.com/magit/magit/issues/1979
+(remove-hook 'server-switch-hook 'magit-commit-diff)
+(setq with-editor-server-window-alist
+      (cons (cons git-commit-filename-regexp 'pop-to-buffer)
+            (remove (cons git-commit-filename-regexp 'switch-to-buffer)
+                    with-editor-server-window-alist)))
