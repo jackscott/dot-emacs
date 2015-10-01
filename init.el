@@ -1,4 +1,8 @@
 (eval-when-compile (require 'cl))
+(setq debug-on-error t)
+
+
+
 (require 'package)
 (setq package-enable-at-startup nil) ; To avoid initializing twice
 
@@ -21,6 +25,9 @@
     (expand-file-name (file-name-sans-versions path) eroot)))
 
 
+(let ((default-directory "/usr/local/share/emacs/site-lisp/"))
+  (normal-top-level-add-subdirs-to-load-path))
+
 (mapc
  (lambda (pathdir)
     (add-to-list 'load-path pathdir))
@@ -37,9 +44,14 @@
         (url-copy-file "http://bit.ly/pkg-el23" f)
         (load f)))))
 
-(setq package-archives '(("marmalade" . "http://marmalade-repo.org/packages/")
-                         ("melpa" . "http://melpa.milkbox.net/packages/")
-                         ("gnu" . "http://elpa.gnu.org/packages/")))
+
+
+
+
+(setq package-archives '(("marmalade" . "https://marmalade-repo.org/packages/")
+                         ("gnu" . "http://elpa.gnu.org/packages/")
+			 ("melpa" . "http://melpa.milkbox.net/packages/")
+			 ))
 
 (package-initialize)
 

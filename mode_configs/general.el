@@ -81,12 +81,6 @@
 (require 'fullframe)
 (fullframe magit-status magit-mode-quit-window nil)
 
-(remove-hook 'server-switch-hook 'magit-commit-diff)
-(setq with-editor-server-window-alist
-      (cons (cons git-commit-filename-regexp 'pop-to-buffer)
-            (remove (cons git-commit-filename-regexp 'switch-to-buffer)
-                    with-editor-server-window-alist)))
-
 
 ;; I like uniquify but not vanilla
 (setq uniquify-buffer-name-style 'forward
@@ -126,7 +120,7 @@
 ;; disable the popup window when committing.
 ;; https://github.com/magit/magit/issues/1979
 (remove-hook 'server-switch-hook 'magit-commit-diff)
-(setq with-editor-server-window-alist
-      (cons (cons git-commit-filename-regexp 'pop-to-buffer)
-            (remove (cons git-commit-filename-regexp 'switch-to-buffer)
-                    with-editor-server-window-alist)))
+;; (setq with-editor-server-window-alist
+;;       (cons (cons git-commit-filename-regexp 'pop-to-buffer)
+;;             (remove (cons git-commit-filename-regexp 'switch-to-buffer)
+;;                     with-editor-server-window-alist)))
