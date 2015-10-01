@@ -27,7 +27,7 @@
 (require 'namespaces)
 (namespace javascript
 	   :import [funcs]
-	   :packages [starter-kit-js
+	   :packages [;;starter-kit-js
                       json-mode
                       js2-mode
                       js2-refactor

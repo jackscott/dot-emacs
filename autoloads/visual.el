@@ -31,15 +31,10 @@
 	   :import [ funcs ]
 	   :packages [sr-speedbar
                       color-theme
-                      color-theme
                       color-theme-approximate
                       color-theme-solarized
                       color-theme-tango
-                      tangotango-theme
-                      naquadah-theme
-
-
-   ])
+                      tangotango-theme])
 
 (defun my-theme-set-default ()
   (interactive)

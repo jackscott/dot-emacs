@@ -2,7 +2,7 @@
 (require 'cider)
 (namespace clj
 	   :import [funcs]
-	   :packages [starter-kit-lisp
+	   :packages [;;starter-kit-lisp
                       clojure-mode
                       cider
                       better-defaults
