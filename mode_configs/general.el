@@ -44,7 +44,9 @@
                       helm-ag
                       swiper
                       swiper-helm
-                      yafolding])
+                      yafolding
+                      yaml-mode
+                      ])
 
 
 ;;for some reason these dont work with :packages 
@@ -124,3 +126,11 @@
 ;;       (cons (cons git-commit-filename-regexp 'pop-to-buffer)
 ;;             (remove (cons git-commit-filename-regexp 'switch-to-buffer)
 ;;                     with-editor-server-window-alist)))
+
+
+(define-derived-mode saltstack-mode yaml-mode "Saltstack"
+  "Minimal Saltstack mode, based on `yaml-mode'."
+  (setq tab-width 2
+        indent-tabs-mode nil))
+
+(add-to-list 'auto-mode-alist '("\\.sls\\'" . saltstack-mode))
