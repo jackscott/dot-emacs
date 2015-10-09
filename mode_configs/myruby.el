@@ -12,6 +12,7 @@
            web-mode
            rvm
            feature-mode
+           bundler
            rspec-mode
            projectile
            ruby-refactor])
@@ -58,7 +59,7 @@
 
 ;; Switch the compilation buffer mode with C-x C-q (useful
 ;; when interacting with a debugger)
-(add-hook 'after-init-hook 'inf-ruby-switch-setup)
+
 
 (add-hook 'ruby-mode-hook
           (lambda ()
@@ -67,7 +68,10 @@
             (ruby-refactor-mode-launch)
             (yard-mode)
             (eldoc-mode)
-            (modify-syntax-entry ?: "."))) ;; Adds ":" to the word definition
+            (modify-syntax-entry ?: ".")
+            (inf-ruby-minor-mode)
+            (add-hook 'after-init-hook 'inf-ruby-switch-setup)
+            )) ;; Adds ":" to the word definition
 
 ;; ;; Start projectile-rails
 ;; (add-hook 'projectile-mode-hook 'projectile-rails-on)
