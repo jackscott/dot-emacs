@@ -15,7 +15,8 @@
            bundler
            rspec-mode
            projectile
-           ruby-refactor])
+           ruby-refactor
+           rbenv])
 
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -37,6 +38,7 @@
 ;; RVM support
 (rvm-use-default)
 
+;;(add-to-list 'load-path (expand-file-name "/")
 ;; Cucumber
 ;; (require 'feature-mode)
 (setq feature-use-rvm t) ;; Tell cucumber to use RVM
@@ -71,6 +73,7 @@
             (modify-syntax-entry ?: ".")
             (inf-ruby-minor-mode)
             (add-hook 'after-init-hook 'inf-ruby-switch-setup)
+            (global-rbenv-mode)
             )) ;; Adds ":" to the word definition
 
 ;; ;; Start projectile-rails
