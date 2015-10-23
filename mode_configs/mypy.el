@@ -38,7 +38,7 @@
                       nose
                       helm-pydoc
                       elpy
-                      autopair
+                      ;autopair
                       flymake-python-pyflakes])
 
 (add-to-list 'auto-mode-alist '("\\.py\\'\\|\\.wsgi\\'" . python-mode))
@@ -61,7 +61,8 @@
       elpy-rpc-backend "jedi")
 
 (defun my-python-mode-hook ()
-  (autopair-mode 1)
+  (enable-paredit-mode)
+  ;(autopair-mode 1)
   (elpy-enable)
   ;; (jedi:setup)
   ;; (jedi:ac-setup)

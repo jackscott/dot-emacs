@@ -37,7 +37,7 @@
 
 (defun my-clojure-hook ()
   (subword-mode)
-  (paredit-mode)
+  (enable-paredit-mode)
   (smartparens-strict-mode)
   (rainbow-delimiters-mode))
 
