@@ -18,7 +18,9 @@
       global-auto-revert-mode 1)
 
 (display-time)
-(set-fringe-mode '(5 . 0))
+(if (display-graphic-p)
+    (set-fringe-mode '(5 . 0)))
+
 
 ;; Enable mouse support
 (unless window-system
