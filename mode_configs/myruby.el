@@ -62,10 +62,8 @@
 ;; Switch the compilation buffer mode with C-x C-q (useful
 ;; when interacting with a debugger)
 
-
-(add-hook 'ruby-mode-hook
-          (lambda ()
-            (hs-minor-mode 1) ;; Enables folding
+(defn my-hook ()
+  (hs-minor-mode 1) ;; Enables folding
             (projectile-rails-on)
             (ruby-refactor-mode-launch)
             (yard-mode)
@@ -74,7 +72,9 @@
             (inf-ruby-minor-mode)
             (add-hook 'after-init-hook 'inf-ruby-switch-setup)
             (global-rbenv-mode)
-            )) ;; Adds ":" to the word definition
+            (ruby-indent-tabs-mode nil))
+
+(add-hook 'ruby-mode-hook 'my-hook)
 
 ;; ;; Start projectile-rails
 ;; (add-hook 'projectile-mode-hook 'projectile-rails-on)

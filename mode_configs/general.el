@@ -81,7 +81,7 @@
 (setq magit-auto-revert-mode nil
       magit-last-seen-setup-instructions "1.4.0")
 
-
+(setq magit-push-always-verify nil)
 (require 'fullframe)
 (fullframe magit-status magit-mode-quit-window nil)
 
@@ -130,12 +130,6 @@
 ;;                     with-editor-server-window-alist)))
 
 
-(define-derived-mode saltstack-mode yaml-mode "Saltstack"
-  "Minimal Saltstack mode, based on `yaml-mode'."
-  (setq tab-width 2
-        indent-tabs-mode nil))
-
-(add-to-list 'auto-mode-alist '("\\.sls\\'" . saltstack-mode))
 
 
 ;; (defvar autopair-modes '(r-mode ruby-mode python-mode))

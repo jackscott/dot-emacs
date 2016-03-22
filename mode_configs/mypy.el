@@ -26,7 +26,7 @@
 (eval-when-compile (require 'jedi nil t))
 
 (require 'namespaces)
-(namespace mypy
+(namespace my-py
 	   :import [funcs]
 	   :packages [python
                       pyflakes
@@ -39,7 +39,8 @@
                       helm-pydoc
                       elpy
                       ;autopair
-                      flymake-python-pyflakes])
+                      flymake-python-pyflakes]
+     :export [my-hook])
 
 (add-to-list 'auto-mode-alist '("\\.py\\'\\|\\.wsgi\\'" . python-mode))
 
@@ -60,15 +61,18 @@
       indent-tabs-mode nil
       elpy-rpc-backend "jedi")
 
-(defun my-python-mode-hook ()
-  (enable-paredit-mode)
-  ;(autopair-mode 1)
+(defun mypy-hook ()
+  (disable-paredit-mode)
+  (autopair-mode 1)
   (elpy-enable)
   ;; (jedi:setup)
   ;; (jedi:ac-setup)
   )
 
-(add-hook 'python-mode-hook 'my-python-mode-hook)
+(defn my-hook ()
+  (mypy-hook))
+
+(add-hook 'python-mode-hook 'mypy-hook)
 
 (when (require 'ipython nil t)
   (setq-default py-shell-name "ipython")
@@ -92,3 +96,4 @@
               (nose-find-project-root)
               "/")))))))
     (nosetests-all)))
+

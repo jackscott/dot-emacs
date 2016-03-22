@@ -33,14 +33,18 @@
                       js2-refactor
                       flymake-jslint])
 
-
-(add-to-list 'auto-mode-alist '("\\.json$" . js-mode))
-(add-hook 'js-mode-hook 'js2-minor-mode)
-(add-hook 'js2-mode-hook 'ac-js2-mode)
 (setq js2-highlight-level 3)
+(setq js-indent-level 2)
 
-(define-key js-mode-map "{" 'paredit-open-curly)
-(define-key js-mode-map "}" 'paredit-close-curly-and-newline)
+(defun  js-hook ()
+  (js2-minor-mode)
+  (define-key js-mode-map "{" 'paredit-open-curly)
+  (define-key js-mode-map "}" 'paredit-close-curly-and-newline))
+
+(add-hook 'js-mode-hook 'js-hook)
+    
+(add-to-list 'auto-mode-alist '("\\.json$" . js-mode))
+(add-hook 'js2-mode-hook 'ac-js2-mode)
 
 
 
