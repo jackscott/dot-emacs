@@ -1,8 +1,6 @@
 (eval-when-compile (require 'cl))
 (setq debug-on-error t)
 
-
-
 (require 'package)
 (setq package-enable-at-startup nil) ; To avoid initializing twice
 
@@ -44,10 +42,6 @@
         (url-copy-file "http://bit.ly/pkg-el23" f)
         (load f)))))
 
-
-
-
-
 (setq package-archives '(("melpa-stable" . "http://stable.melpa.org/packages/")
                          ("marmalade" . "https://marmalade-repo.org/packages/")
                          ("gnu" . "http://elpa.gnu.org/packages/")
@@ -56,17 +50,11 @@
 
 (package-initialize)
 
-;; (defun read-lines (filePath)
-;;   "Return a list of lines of a file at filePath."
-;;   (with-temp-buffer
-;;     (insert-file-contents filePath)
-;;     (split-string (buffer-string) "\n" t)))
-
 ;; Load in packages
 (mapc
  (lambda (pkgname)
     (if (not (package-installed-p pkgname))
-	(package-install pkgname)))
+        (package-install (identity pkgname))))
  '(s
 
    auto-complete
