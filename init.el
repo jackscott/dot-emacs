@@ -49,6 +49,7 @@
 			 ))
 
 (package-initialize)
+(package-refresh-contents)
 
 ;; Load in packages
 (mapc
@@ -56,7 +57,6 @@
     (if (not (package-installed-p pkgname))
         (package-install (identity pkgname))))
  '(s
-
    auto-complete
    bash-completion
    bookmark+
