@@ -63,8 +63,9 @@
 
 (defun mypy-hook ()
   (disable-paredit-mode)
-  (autopair-mode 1)
+  ;-mode 1)
   (elpy-enable)
+  (electric-pair-mode 1)
   ;; (jedi:setup)
   ;; (jedi:ac-setup)
   )
