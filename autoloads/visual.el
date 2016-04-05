@@ -34,7 +34,10 @@
                       color-theme-approximate
                       color-theme-solarized
                       color-theme-tango
+                      darktooth-theme
                       tangotango-theme])
+
+(add-to-list 'custom-theme-load-path (dotdir+ "themes"))
 
 (defun my-theme-set-default ()
   (interactive)
@@ -77,7 +80,8 @@
 ;; refactor this, grouping into categroies and changing the theme
 ;; category depending on the time of day.  maybe cycle themes every 20-30
 ;; mins, might get annoying
-(setq my-color-themes (list 'color-theme-dark-laptop
+(setq my-color-themes (list 
+                            'color-theme-dark-laptop
                             'color-theme-ld-dark
                             'color-theme-calm-forest
                             'color-theme-gray30
@@ -137,6 +141,6 @@
 ;; cycle through color themes
 (global-set-key [f12] 'my-theme-cycle)
 (global-set-key (kbd "M-<return>") 'toggle-fullscreen)
-(color-theme-dark-laptop)
-(toggle-fullscreen)
+;;(color-theme-dark-laptop)
+;;(toggle-fullscreen)
 ;(sr-speedbar-open)
