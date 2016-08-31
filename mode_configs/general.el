@@ -30,25 +30,25 @@
 (require 'namespaces)
 
 (namespace general
-	   :use [cl uniquify]
-           :import [funcs]
-	   :export []
-	   :packages [yasnippet
-                      ido
-                      sr-speedbar
-                      bug-reference-github
-                      projectile
-                      rainbow-delimiters
-                      company
-                      window-numbering
-                      helm-ag
-                      swiper
-                      swiper-helm
-                      yafolding
-                      yaml-mode
-                      paredit
-                      ;autopair
-                      ])
+  :use [cl uniquify]
+  :import [funcs]
+  :export []
+  :packages [yasnippet
+             ido
+             sr-speedbar
+             bug-reference-github
+             projectile
+             rainbow-delimiters
+             company
+             window-numbering
+             helm-ag
+             swiper
+             swiper-helm
+             yafolding
+             yaml-mode
+             paredit
+                                     ;autopair
+             ])
 
 
 ;;for some reason these dont work with :packages 
@@ -74,12 +74,14 @@
 
 (setq ac-auto-start 2 ac-ignore-case nil)
 (add-to-list 'ac-sources 'ac-source-yasnippet)
-
+(setq yas/root-directory '("~/.emacs.d/snippets"
+                           "~/repos/dot-emacs/snippets"))
 
 
 ;; Magit stuff
 (setq magit-auto-revert-mode nil
-      magit-last-seen-setup-instructions "1.4.0")
+      magit-last-seen-setup-instructions "1.4.0"
+      magit-push-current-set-remote-if-missing t)
 
 (setq magit-push-always-verify nil)
 (require 'fullframe)
@@ -105,13 +107,14 @@
                           (lambda nil (local-set-key (kbd "RET") 'newline-and-indent))))))
     (mapc myfn modes)))
 
-
+(yas-reload-all)
 ;; these will be enabled in all prog-mode descendant modes
 (defun global-prog-mode-hook ()
   (rainbow-delimiters-mode)
   (bug-reference-github-set-url-format)
   (smartparens-global-mode t)
   (flyspell-prog-mode)
+  (yas-minor-mode 1)
   (show-smartparens-global-mode t))
 
 (when (executable-find "hunspell")
