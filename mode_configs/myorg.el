@@ -1,6 +1,6 @@
 (require 'namespaces)
 (namespace org
-  :packages [org s])
+  :packages [org s org-dropbox org-mac-iCal org-time-budgets])
 
 
 (add-to-list 'org-modules 'org-timer)
@@ -70,7 +70,15 @@
 (setq org-clock-auto-clock-resolution (quote when-no-clock-is-running))
 ;; Include current clocking task in clock reports
 (setq org-clock-report-include-clocking-task t)
+;; 
+(setq org-time-clocksum-use-fractional t)
 
+;; format string used when creating CLOCKSUM lines and when generating a
+;; time duration (avoid showing days)
+(setq org-time-clocksum-format
+      '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
+
+(setq org-time-stamp-rounding-minutes '(0 15))
 
 (defun org-summary-todo (n-done n-not-done)
        "Switch entry to DONE when all subentries are done, to TODO otherwise."
@@ -78,3 +86,17 @@
          (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
      
 (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
+
+(defun my-org-clocktable-indent-string (level)
+  (if (= level 1)
+      ""
+    (let ((str "^"))
+      (while (> level 2)
+        (setq level (1- level)
+              str (concat str "---")
+              ))
+      (concat str "--> "))))
+
+(advice-add 'org-clocktable-indent-string
+            :override
+            #'my-org-clocktable-indent-string)

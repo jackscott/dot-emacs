@@ -8,14 +8,23 @@
 
 
 (defun my-hook ()
-  (my-py/my-hook))
+  (python-mode-hook)
+  )
+  
+(defun add-to-mode (mode lst)
+  (dolist (file lst)
+    (add-to-list 'auto-mode-alist
+                 (cons file mode))))
 
-(define-derived-mode saltstack-mode yaml-mode "Saltstack"
-  "Minimal Saltstack mode, based on `yaml-mode'."
+(define-derived-mode saltstack-mode salt-mode "Saltstack"
+  "Minimal Saltstack mode, based on `salt-mode'."
   (setq tab-width 2
         indent-tabs-mode nil))
 
-(add-to-list 'auto-mode-alist '("\\.sls\\'" . saltstack-mode))
+(add-to-mode 'saltstack-mode (list
+                              "\\.sls$"
+                              "\\.jinja$"
+                              "pillar\\.example$"))
 
 (add-hook 'salt-mode-hook (~ my-hook))
 

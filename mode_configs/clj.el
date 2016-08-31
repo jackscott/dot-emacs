@@ -39,6 +39,7 @@
   (subword-mode)
   (enable-paredit-mode)
   (smartparens-strict-mode)
+  (eldoc-mode)
   (rainbow-delimiters-mode))
 
 (add-hook 'clojure-mode-hook 'my-clojure-hook)
@@ -47,9 +48,8 @@
 (eval-after-load 'cider
   '(progn
      (add-hook 'cider-mode-hook 'ac-flyspell-workaround)
-     (add-hook 'cider-mode-hook 'ac-cider-setup)
-     (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
-     (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)))
+     (add-hook 'cider-mode-hook 'ac-cider-setup)))
+     
 
 (defun my-cider-hook ()
   (my-clojure-hook)
