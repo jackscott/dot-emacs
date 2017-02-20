@@ -34,7 +34,6 @@
                       color-theme-approximate
                       color-theme-solarized
                       color-theme-tango
-                      darktooth-theme
                       tangotango-theme])
 
 (add-to-list 'custom-theme-load-path (dotdir+ "themes"))

@@ -1,4 +1,4 @@
-;;; dot-emacs/mode_config/myppy.el --- python things
+ ;;; dot-emacs/mode_config/myppy.el --- python things
 ;;
 ;; Copyright (C) 2013-2015  Jack Scott (js@nine78.com)
 ;;
@@ -27,22 +27,24 @@
 
 (require 'namespaces)
 (namespace my-py
-	   :import [funcs]
-	   :packages [python
-                      pyflakes
-                      pylint
-                      python-pep8
-                      python-pylint
-                      virtualenvwrapper
-                      jedi
-                      nose
-                      helm-pydoc
-                      elpy
-                      subword
-                      linum
-                      ;autopair
-                      flymake-python-pyflakes]
-     :export [my-hook])
+  :import [funcs]
+  :packages [python
+             flycheck
+             pylint
+             python-pep8
+             python-pylint
+             virtualenvwrapper
+             company-jedi
+             nose
+             helm-pydoc
+             elpy
+             subword
+             linum
+						 jedi
+             ;autopair
+             ;flymake-python-pyflakes
+             ]
+  :export [my-hook])
 
 (add-to-list 'auto-mode-alist '("\\.py\\'\\|\\.wsgi\\'" . python-mode))
 
@@ -55,19 +57,25 @@
                         py-indent-honors-inline-comment)
                       t)
 
-(defun mypy-defaults ()
-    (setq py-load-python-mode-pymacs-p nil
-        jedi:setup-keys t
-        jedi:complete-on-dot t
-        py-indent-offset 2
-        default-tab-width 2
-        py-smart-indentation t
-        indent-tabs-mode nil
-        tab-width 2
-        elpy-rpc-backend "jedi"))
+
+(setq py-load-python-mode-pymacs-p nil
+      jedi:setup-keys t
+      jedi:complete-on-dot t
+      py-indent-offset 2
+      default-tab-width 2
+      py-smart-indentation t
+      indent-tabs-mode nil
+      elpy-rpc-backend "jedi")
+
+(require 'jedi)
 
 (defun mypy-hook ()
-  (mypy-defaults)
+  ;;; (linum-mode)
+  (set (make-local-variable 'company-backends)
+       '(company-jedi))
+  
+  (setq-default indent-tabs-mode t)
+  (setq-default tab-width 2)
   (delete-selection-mode t)
   (disable-paredit-mode)
   (elpy-enable)
@@ -75,16 +83,14 @@
   (jedi:setup)
   (jedi:ac-setup)
   (subword-mode)
-  (imenu-add-menubar-index)
-  (linum-mode))
+  (flyspell-prog-mode)
+  (imenu-add-menubar-index))
 
 (defn my-hook ()
   ;; Exports the hook through the namespace system
-  (mypy-hook)
-  (flyspell-prog-mode))
+  (mypy-hook))
 
 (add-hook 'python-mode-hook 'mypy-hook)
-(add-hook 'text-mode-hook 'mypy-defaults)
 
 (when (require 'ipython nil t)
   (setq-default py-shell-name "ipython")
@@ -108,4 +114,5 @@
               (nose-find-project-root)
               "/")))))))
     (nosetests-all)))
+
 

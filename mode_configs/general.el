@@ -31,25 +31,22 @@
 
 (namespace general
   :use [cl uniquify]
-  :import [funcs]
+  :import []
   :export []
-  :packages [yasnippet
+  :packages [;;yasnippet
              ido
              sr-speedbar
              bug-reference-github
              projectile
              rainbow-delimiters
-             company
+             ;;company
              window-numbering
-             helm-ag
-             swiper
-             swiper-helm
+             ;;helm-ag
+             ;;swiper
+             ;;swiper-helm
              yafolding
              yaml-mode
-             paredit
-                                     ;autopair
-             ])
-
+             paredit])
 
 ;;for some reason these dont work with :packages 
 (require 'smartparens-config)
@@ -60,39 +57,6 @@
 (setq projectile-file-exists-remote-cache-expire (* 10 60))
 
 
-(require 'anzu)
-(global-anzu-mode +1)
-(global-set-key (kbd "M-%") 'anzu-query-replace)
-(global-set-key (kbd "C-M-%") 'anzu-query-replace-regexp)
-
-;; setup auto-complete stuff.  
-(require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories (emacsdir+ "ac-dict"))
-(ac-config-default)
-(setq-default ac-sources (add-to-list 'ac-sources 'ac-source-dictionary))
-(global-auto-complete-mode t)
-
-(setq ac-auto-start 2 ac-ignore-case nil)
-(add-to-list 'ac-sources 'ac-source-yasnippet)
-(setq yas/root-directory '("~/.emacs.d/snippets"
-                           "~/repos/dot-emacs/snippets"))
-
-
-;; Magit stuff
-(setq magit-auto-revert-mode nil
-      magit-last-seen-setup-instructions "1.4.0"
-      magit-push-current-set-remote-if-missing t)
-
-(setq magit-push-always-verify nil)
-(require 'fullframe)
-(fullframe magit-status magit-mode-quit-window nil)
-
-
-;; I like uniquify but not vanilla
-(setq uniquify-buffer-name-style 'forward
-      uniquify-separator "/"
-      uniquify-after-kill-buffer-p t
-      uniquify-ignore-buffers-re "^\\*")
 
 ;"Rebind <RET> key to do automatic indentation in certain modes (not haskell-mode)."
 ;<http://www.metasyntax.net/unix/dot-emacs.html>
@@ -107,15 +71,16 @@
                           (lambda nil (local-set-key (kbd "RET") 'newline-and-indent))))))
     (mapc myfn modes)))
 
-(yas-reload-all)
+
 ;; these will be enabled in all prog-mode descendant modes
 (defun global-prog-mode-hook ()
   (rainbow-delimiters-mode)
   (bug-reference-github-set-url-format)
   (smartparens-global-mode t)
+  (show-smartparens-global-mode t)
   (flyspell-prog-mode)
   (yas-minor-mode 1)
-  (show-smartparens-global-mode t))
+  )
 
 (when (executable-find "hunspell")
   (setq-default ispell-program-name "hunspell")
@@ -124,27 +89,30 @@
 (add-hook 'prog-mode-hook 'global-prog-mode-hook)
 
 
-;; disable the popup window when committing.
-;; https://github.com/magit/magit/issues/1979
-(remove-hook 'server-switch-hook 'magit-commit-diff)
-;; (setq with-editor-server-window-alist
-;;       (cons (cons git-commit-filename-regexp 'pop-to-buffer)
-;;             (remove (cons git-commit-filename-regexp 'switch-to-buffer)
-;;                     with-editor-server-window-alist)))
 
 
+;;;; Random mode configs that dont require a stand alone file
+(defun bash-mode ()
+  (shell-script-mode)
+  (sh-set-shell "bash"))
 
+(setq auto-mode-alist (cons '("\\.bash\\'\\|\\.sh\\'" . bash-mode) auto-mode-alist))
 
-;; (defvar autopair-modes '(r-mode ruby-mode python-mode))
-;; (defun turn-on-autopair-mode () (autopair-mode 1))
-;; (dolist (mode autopair-modes) (add-hook (intern (concat (symbol-name mode) "-hook")) 'turn-on-autopair-mode))
+;;Taken from the default .emacs file on a gentoo-system
+;; Copyright Gentoo Foundation 
+;;ebuild-mode settings
+(defun ebuild-mode ()
+  (shell-script-mode)
+  ;;(sh-set-shell "bash") 
+  (make-local-variable 'tab-width)
+  (setq tab-width 4))
 
-;; (defadvice paredit-mode (around disable-autopairs-around (arg))
-;;   "Disable autopairs mode if paredit-mode is turned on"
-;;   ad-do-it
-;;   (if (null ad-return-value)
-;;       (autopair-mode 1)
-;;     (autopair-mode 0)
-;;     ))
+(setq auto-mode-alist (cons '("\\.ebuild\\'" . ebuild-mode) auto-mode-alist)) 
+(setq auto-mode-alist (cons '("\\.eclass\\'" . ebuild-mode) auto-mode-alist))
 
-;; (ad-activate 'paredit-mode)
+;; LUA
+(when (require 'lua-mode nil t)
+  ;;(autoload 'lua-mode "lua-mode" "Lua editing mode." t)
+  (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
+  (add-to-list 'interpreter-mode-alist '("lua" . lua-mode)))
+

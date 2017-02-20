@@ -30,8 +30,28 @@
 
 (namespace funcs
 	   :use [cl]
-	   :export [set-list-items toggle-bars mychmod myrefresh sr-speedbar])
+	   :export [set-list-items toggle-bars
+                             mychmod
+                             myrefresh
+                             sr-speedbar
+                             home-dir
+                             emacs-dir
+                             dot-dir
+                             slurp])
 
+
+(defn home-dir (pth)
+  (homedir+ pth))
+
+(defn emacs-dir (pth)
+  (emacsdir+ pth))
+
+(defun emacsdir+ (path)
+  "Create an bsolute path to ~/.emacs.d/``path``"
+  (format "%s/.emacs.d/%s" (getenv "HOME") path))
+
+(defn dot-dir (pth)
+  (format "%s/snippets" *emacs-root*))
 
 (defn toggle-bars ()
   (interactive)
@@ -111,3 +131,4 @@
   (let ((desktop-load-locked-desktop "ask"))
     (desktop-read)
     (desktop-save-mode 1)))
+
