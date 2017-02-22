@@ -6,7 +6,7 @@
 (defvar *emacs-root* (file-name-directory (or load-file-name buffer-file-name)))
 (defvar user-name (getenv "USER"))
 
-(require 'package)
+
 ;; avoid package init twice
 (setq package-enable-at-startup nil)
 
@@ -54,15 +54,15 @@
       '(lambda ()
         "pull the file and load it"
         (url-copy-file "http://bit.ly/pkg-el23" f)
-        (load f)))))
+        (load f))))
+  (require 'package))
 
 (setq package-archives
       '(("melpa-stable" . "https://stable.melpa.org/packages/")
-	("melpa" . "http://melpa.milkbox.net/packages/")
-        ("marmalade" . "https://marmalade-repo.org/packages/")
-        ("gnu" . "http://elpa.gnu.org/packages/")
-	("org" . "http://orgmode.org/elpa/")
-        ))
+        ("melpa" . "http://melpa.milkbox.net/packages/")
+        ;;("marmalade" . "https://marmalade-repo.org/packages/")
+        ;;("gnu" . "http://elpa.gnu.org/packages/")
+        ("org" . "http://orgmode.org/elpa/")))
 
 (package-initialize)
 (setq package-selected-packages '(split-string (slurp (dotdir+ "PACKAGES")) "\n" t))
