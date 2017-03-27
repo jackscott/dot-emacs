@@ -66,7 +66,6 @@ magit
 magit-mode
 markdown-mode
 namespaces
-no-easy-keys
 nose
 org-beautify-theme
 org-dropbox

@@ -50,8 +50,6 @@
 
 ;;for some reason these dont work with :packages 
 (require 'smartparens-config)
-(require 'no-easy-keys)
-
 (setq projectile-indexing-method 'native)
 (setq projectile-enable-caching t)
 (setq projectile-file-exists-remote-cache-expire (* 10 60))

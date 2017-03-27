@@ -12,7 +12,6 @@
       projectile-global-mode 1
       yas-global-mode 1
       ido-mode 1
-      no-easy-keys 1
       window-numbering-mode 1
       winner-mode 1
       global-auto-revert-mode 1)
