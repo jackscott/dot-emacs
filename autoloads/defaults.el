@@ -4,7 +4,10 @@
 (namespace defaults
   :use [cl]
   :import [funcs]
-  :packages [])
+  :packages [ido
+             flx-ido
+             grizzl
+             projectile])
 
 
 ;; activate a bunch of modes and things
@@ -12,7 +15,10 @@
       projectile-global-mode 1
       yas-global-mode 1
       ido-mode 1
-      window-numbering-mode 1
+      ido-everywhere 1
+      flx-ido-mode 1
+      ido-enable-flex-matching t
+      ido-use-faces nil
       winner-mode 1
       global-auto-revert-mode 1)
 
@@ -41,4 +47,6 @@
 (setq shell-file-name (getenv "SHELL"))
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
+
 (put 'upcase-region 'disabled nil)
+(window-numbering-mode 1)

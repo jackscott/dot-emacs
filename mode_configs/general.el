@@ -31,7 +31,7 @@
 
 (namespace general
   :use [cl uniquify]
-  :import []
+  :import [autocomp]
   :export []
   :packages [;;yasnippet
              ido
@@ -50,12 +50,13 @@
 
 ;;for some reason these dont work with :packages 
 (require 'smartparens-config)
+
 (setq projectile-indexing-method 'native)
 (setq projectile-enable-caching t)
 (setq projectile-file-exists-remote-cache-expire (* 10 60))
 
 
-
+(setq js-indent-level 2)
 ;"Rebind <RET> key to do automatic indentation in certain modes (not haskell-mode)."
 ;<http://www.metasyntax.net/unix/dot-emacs.html>
 (defun auto-indent ()

@@ -31,9 +31,12 @@
 (setq-default ac-sources (add-to-list 'ac-sources
                                       'ac-source-dictionary
                                       'ac-source-yasnippet))
+
 (require 'auto-complete-config)
+(ac-config-default)
 (add-to-list 'ac-dictionary-directories (funcs/emacs-dir "ac-dict"))
 (global-auto-complete-mode t)
+
 (setq ac-auto-start 3
       ac-ignore-case 'smart)
 
