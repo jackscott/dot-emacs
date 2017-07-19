@@ -1,6 +1,10 @@
 (eval-when-compile (require 'cl))
 (setq debug-on-error t)
 
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
+
 (defvar *pidfile* "emacs-server.pid")
 (defvar *emacs-load-start* (current-time))
 (defvar *emacs-root* (file-name-directory (or load-file-name buffer-file-name)))
@@ -39,6 +43,8 @@
 (let ((default-directory "/usr/local/share/emacs/site-lisp/"))
   (if (file-directory-p default-directory)
       (normal-top-level-add-subdirs-to-load-path)))
+
+
 
 (mapc
  (lambda (pathdir)
