@@ -8,6 +8,7 @@ align-cljlet
 anzu
 auto-complete
 autopair
+autopep8
 bash-completion
 better-defaults
 bfbuilder
@@ -38,8 +39,6 @@ find-things-fast
 flycheck-clojure
 flycheck-color-mode-line
 flycheck-cython
-flymake-easy
-flymake-jslint
 fullframe
 gist
 goto-gem
