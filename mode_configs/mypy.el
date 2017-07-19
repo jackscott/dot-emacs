@@ -27,12 +27,13 @@
 
 (require 'namespaces)
 (namespace my-py
-  :import [funcs]
+  :import [funcs
+           autocomp]
   :packages [python
              flycheck
              pylint
-             python-pep8
-             python-pylint
+             ;python-pep8
+             ;python-pylint
              virtualenvwrapper
              company-jedi
              nose
@@ -59,32 +60,112 @@
 
 
 (setq py-load-python-mode-pymacs-p nil
-      jedi:setup-keys t
-      jedi:complete-on-dot t
+      
       py-indent-offset 2
       default-tab-width 2
       py-smart-indentation t
       indent-tabs-mode nil
-      elpy-rpc-backend "jedi")
+      elpy-rpc-backend "jedi"
+      )
+
+(setq jedi:setup-keys t
+      jedi:complete-on-dot t
+      jedi:get-in-function-call-delay 10000000
+      projectile-switch-project-action 'venv-projectile-auto-workon)
 
 (require 'jedi)
+(require 'py-autopep8)
+(require 'flycheck)
+(add-hook 'after-init-hook #'global-flycheck-mode)
+
+
+
+(defvar jedi-config:vcs-root-sentinel ".git")
+(defvar jedi-config:python-module-sentinel "__init__.py")
+(defvar jedi-config:with-virtualenv nil
+  "Set to non-nil to point to a particular virtualenv.")
+
+(defun get-project-root (buf repo-type init-file)
+  (vc-find-root (expand-file-name (buffer-file-name buf)) repo-type))
+
+(defvar jedi-config:find-root-function 'get-project-root)
+
+(defun current-buffer-project-root ()
+  (funcall jedi-config:find-root-function
+           (current-buffer)
+           jedi-config:vcs-root-sentinel
+           jedi-config:python-module-sentinel))
+
+(defun jedi-config:setup-server-args ()
+  ;; helper macro
+  (defmacro add-args (arg-list arg-name arg-value)
+    '(setq ,arg-list (append ,arg-list (list ,arg-name ,arg-value))))
+
+  (let ((project-root (current-buffer-project-root)))
+    (make-local-variable 'jedi:server-args)
+
+    (when project-root
+      (add-args jedi:server-args "--sys-path" project-root))
+
+    (when jedi-config:with-virtualenv
+      (add-args jedi:server-args
+                "--virtual-env"
+                jedi-config:with-virtualenv))))
+
+(defvar jedi-config:use-system-python t)
+
+(defun jedi-config:set-python-executable ()
+  (set-exec-path-from-shell-PATH )
+  (make-local-variable 'jedi:server-command)
+  (set 'jedi:server-command
+       (list (executable-find "python"
+                              (cadr default-jedi-server-command)))))
+
+
+
+
+(defun elpy-hook ()
+  "Wrapper fn for required actions during elpy initialization."
+	(remove-hook 'elpy-modules 'elpy-module-flymake)
+	(add-hook 'elpy-mode-hook 'flycheck-mode)
+	(add-hook 'elpy-mode-hook 'elpy-use-ipython)
+	(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+	(elpy-enable))
 
 (defun mypy-hook ()
-  ;;; (linum-mode)
   (set (make-local-variable 'company-backends)
        '(company-jedi))
-  
-  (setq-default indent-tabs-mode t)
+	(elpy-hook)
+  (setq-default indent-tabs-mode nil)
   (setq-default tab-width 2)
   (delete-selection-mode t)
   (disable-paredit-mode)
-  (elpy-enable)
-  (electric-pair-mode 1)
+
+  
+  (when jedi-config:use-system-python
+    (jedi-config:set-python-executable))
+  
   (jedi:setup)
   (jedi:ac-setup)
+  (jedi-config:setup-server-args)
+  
+  (electric-pair-mode 1)
+  
+  
+  
   (subword-mode)
   (flyspell-prog-mode)
-  (imenu-add-menubar-index))
+  (imenu-add-menubar-index)
+
+  (flycheck-mode 1)
+  (semantic-mode 1)
+  
+  (setq flycheck-checker 'python-pylint
+        flycheck-checker-error-threshold 900
+        flycheck-pylintrc "~/.pylintrc")
+  
+  )
+
 
 (defn my-hook ()
   ;; Exports the hook through the namespace system
