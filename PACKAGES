@@ -1,4 +1,3 @@
-ac-cider
 ac-etags
 ac-helm
 ac-ispell
@@ -21,7 +20,6 @@ clojure-mode-extra-font-locking
 coffee-mode
 color-theme-approximate
 color-theme-solarized
-color-theme-tango
 company-jedi
 concurrent
 ctable

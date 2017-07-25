@@ -33,7 +33,6 @@
                       color-theme
                       color-theme-approximate
                       color-theme-solarized
-                      color-theme-tango
                       tangotango-theme])
 
 (add-to-list 'custom-theme-load-path (dotdir+ "themes"))
