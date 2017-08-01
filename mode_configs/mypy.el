@@ -1,4 +1,4 @@
- ;;; dot-emacs/mode_config/myppy.el --- python things
+ ;;; dot-emacs/mode_config/mypy.el --- python things
 ;;
 ;; Copyright (C) 2013-2015  Jack Scott (js@nine78.com)
 ;;
@@ -32,8 +32,7 @@
   :packages [python
              flycheck
              pylint
-             ;python-pep8
-             ;python-pylint
+             py-autopep8
              virtualenvwrapper
              company-jedi
              nose
@@ -58,9 +57,7 @@
                         py-indent-honors-inline-comment)
                       t)
 
-
 (setq py-load-python-mode-pymacs-p nil
-      
       py-indent-offset 2
       default-tab-width 2
       py-smart-indentation t
@@ -76,6 +73,9 @@
 (require 'jedi)
 (require 'py-autopep8)
 (require 'flycheck)
+(require 'elpy)
+(python-shell-prompt-detect)
+
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
 
@@ -89,6 +89,9 @@
   (vc-find-root (expand-file-name (buffer-file-name buf)) repo-type))
 
 (defvar jedi-config:find-root-function 'get-project-root)
+
+;; (let ((project-root (current-buffer-project-root)))
+;;   (message "the project root is %s" project-root))
 
 (defun current-buffer-project-root ()
   (funcall jedi-config:find-root-function
@@ -112,16 +115,7 @@
                 "--virtual-env"
                 jedi-config:with-virtualenv))))
 
-(defvar jedi-config:use-system-python t)
-
-(defun jedi-config:set-python-executable ()
-  (set-exec-path-from-shell-PATH )
-  (make-local-variable 'jedi:server-command)
-  (set 'jedi:server-command
-       (list (executable-find "python"
-                              (cadr default-jedi-server-command)))))
-
-
+(defvar jedi-config:use-system-python nil)
 
 
 (defun elpy-hook ()
@@ -133,6 +127,7 @@
 	(elpy-enable))
 
 (defun mypy-hook ()
+  "Python hook, does all of the heavy lifting of initializing python environment."
   (set (make-local-variable 'company-backends)
        '(company-jedi))
 	(elpy-hook)
@@ -140,32 +135,21 @@
   (setq-default tab-width 2)
   (delete-selection-mode t)
   (disable-paredit-mode)
-
-  
-  (when jedi-config:use-system-python
-    (jedi-config:set-python-executable))
   
   (jedi:setup)
   (jedi:ac-setup)
-  (jedi-config:setup-server-args)
-  
+  ;;(jedi-config:setup-server-args)
   (electric-pair-mode 1)
-  
-  
-  
-  (subword-mode)
   (flyspell-prog-mode)
   (imenu-add-menubar-index)
 
   (flycheck-mode 1)
   (semantic-mode 1)
-  
+  (subword-mode 1)
   (setq flycheck-checker 'python-pylint
         flycheck-checker-error-threshold 900
         flycheck-pylintrc "~/.pylintrc")
-  
   )
-
 
 (defn my-hook ()
   ;; Exports the hook through the namespace system
