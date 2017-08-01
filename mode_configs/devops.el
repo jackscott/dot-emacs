@@ -3,7 +3,8 @@
   :import [funcs my-py]
   :packages [mmm-mode
              yaml-mode
-             salt-mode])
+             ;;salt-mode
+])
 
 
 (require 'yaml-mode)
@@ -11,7 +12,7 @@
 (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 (setq yaml-indent-offset 2)
 (defn my-hook ()
-  (salt-mode 1)
+;;  (salt-mode 1)
   (python-mode-hook)
 	)
   
@@ -25,8 +26,8 @@
 ;;   (setq tab-width 2
 ;;         indent-tabs-mode nil))
 
-(add-to-list 'auto-mode-alist
-             '("\\.sls\\'\\|pillar\\.example\\'\\|\\.jinja\\'" . salt-mode))
+;;(add-to-list 'auto-mode-alist
+;;             '("\\.sls\\'\\|pillar\\.example\\'\\|\\.jinja\\'" . salt-mode))
 
 
-(add-hook 'salt-mode-hook (~ my-hook))
+;;(add-hook 'salt-mode-hook (~ my-hook))
