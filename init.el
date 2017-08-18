@@ -53,7 +53,8 @@
 
 ;; emacs < 24 doesnt have packages functionality, load this in instead
 (if (< (string-to-number emacs-version) 24)
-  (lexical-let ((f (emacsdir+ "package.el")))
+    (lexical-let ((f (emacsdir+ "package.el")))
+      
     (if (file-exists-p f)
         (load f)
       '(lambda ()

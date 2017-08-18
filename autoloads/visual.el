@@ -1,4 +1,4 @@
-;;; dot-emacs/visual.el --- all my keybindings
+;;; dot-emacs/visual.el --- making things pretty
 ;;
 ;; Copyright (C) 2013-2015  Jack Scott (js@nine78.com)
 ;;
@@ -78,22 +78,22 @@
 ;; refactor this, grouping into categroies and changing the theme
 ;; category depending on the time of day.  maybe cycle themes every 20-30
 ;; mins, might get annoying
-(setq my-color-themes (list 
-                            'color-theme-dark-laptop
-                            'color-theme-ld-dark
-                            'color-theme-calm-forest
-                            'color-theme-gray30
-                            'color-theme-jsc-dark
-                            'color-theme-sitaramv-solaris
-                            'color-theme-resolve
-                            'color-theme-classic
-                            'color-theme-jonadabian-slate
-                            'color-theme-kingsajz
-                            'color-theme-shaman
-                            'color-theme-subtle-blue
-                            'color-theme-snowish
-                            'color-theme-sitaramv-nt
-                            'color-theme-wheat))
+(setq my-color-themes (list
+                       'color-theme-dark-laptop
+                       'color-theme-ld-dark
+                       'color-theme-calm-forest
+                       'color-theme-gray30
+                       'color-theme-jsc-dark
+                       'color-theme-sitaramv-solaris
+                       'color-theme-resolve
+                       'color-theme-classic
+                       'color-theme-jonadabian-slate
+                       'color-theme-kingsajz
+                       'color-theme-shaman
+                       'color-theme-subtle-blue
+                       'color-theme-snowish
+                       'color-theme-sitaramv-nt
+                       'color-theme-wheat))
 
 (setq theme-current my-color-themes)
 (my-theme-set-default)

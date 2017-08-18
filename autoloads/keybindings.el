@@ -59,12 +59,12 @@
  "\C-cg"        'magit-status
  "\C-c\C-o"     'slime-close-all-parens-in-sexp
  "\C-c\C-p"     'paredit-open-round
- "\C-f"		'right-char
+ "\C-f"         'right-char
  ;Add alternatives to M-x, on the recommendation of Steve Yegge.
  ;<http://steve.yegge.googlepages.com/effective-emacs>
- "\C-x\C-m" 'execute-extended-command
- "\C-c\C-m" 'execute-extended-command
- "\C-x]" 'slime-close-all-parens-in-sexp)
+ "\C-x\C-m"     'execute-extended-command
+ "\C-c\C-m"     'execute-extended-command
+ "\C-x]"        'slime-close-all-parens-in-sexp)
 
 (define-key isearch-mode-map "\C-s" 'isearch-repeat-forward)
 
