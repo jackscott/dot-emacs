@@ -63,7 +63,9 @@
       py-smart-indentation t
       indent-tabs-mode nil
       elpy-rpc-backend "jedi"
-      )
+      python-shell-unbuffered nil
+      python-shell-prompt-detect-failure-warning nil
+      python-shell-prompt-detect-enabled nil)
 
 (setq jedi:setup-keys t
       jedi:complete-on-dot t
