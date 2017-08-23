@@ -15,19 +15,25 @@
            bundler
            rspec-mode
            projectile
+           projectile-rails
            ruby-refactor
            rbenv])
 
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Files with the following extensions should open in ruby-mode
-(add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
+
+(add-to-list 'auto-mode-alist
+             '("\\.rb\\'\\|.rake\\'\\|\\.gemspec\\'\\|\\.ru" . ruby-mode))
+
+;; (add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
+;; (add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.gemspec$" . ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.ru$" . ruby-mode))
+;; (add-to-list 'auto-mode-alist '("\\.ru$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Gemfile$" . ruby-mode))
-
+(add-to-list 'auto-mode-alist '("Vagrantfile$" . ruby-mode))
 
 ;; When folding, take these delimiters into consideration
 (add-to-list 'hs-special-modes-alist
@@ -64,15 +70,15 @@
 
 (defun my-hook ()
   (hs-minor-mode 1) ;; Enables folding
-            (projectile-rails-on)
-            (ruby-refactor-mode-launch)
-            (yard-mode)
-            (eldoc-mode)
-            (modify-syntax-entry ?: ".")
-            (inf-ruby-minor-mode)
-            (add-hook 'after-init-hook 'inf-ruby-switch-setup)
-            (global-rbenv-mode)
-            (ruby-indent-tabs-mode nil))
+  (projectile-rails-on)
+  (ruby-refactor-mode-launch)
+  (yard-mode)
+  (eldoc-mode)
+  (modify-syntax-entry ?: ".")
+  (inf-ruby-minor-mode)
+  (add-hook 'after-init-hook 'inf-ruby-switch-setup)
+  (global-rbenv-mode)
+  (ruby-indent-tabs-mode nil))
 
 (add-hook 'ruby-mode-hook 'my-hook)
 
