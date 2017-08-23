@@ -33,6 +33,7 @@
              flycheck
              pylint
              py-autopep8
+             python-pylint
              virtualenvwrapper
              company-jedi
              nose
@@ -73,7 +74,7 @@
       projectile-switch-project-action 'venv-projectile-auto-workon)
 
 (require 'jedi)
-(require 'py-autopep8)
+;;(require 'py-autopep8)
 (require 'flycheck)
 (require 'elpy)
 (python-shell-prompt-detect)
@@ -125,7 +126,7 @@
 	(remove-hook 'elpy-modules 'elpy-module-flymake)
 	(add-hook 'elpy-mode-hook 'flycheck-mode)
 	(add-hook 'elpy-mode-hook 'elpy-use-ipython)
-	(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+	;;(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
 	(elpy-enable))
 
 (defun mypy-hook ()

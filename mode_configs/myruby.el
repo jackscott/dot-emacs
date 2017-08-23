@@ -62,7 +62,7 @@
 ;; Switch the compilation buffer mode with C-x C-q (useful
 ;; when interacting with a debugger)
 
-(defn my-hook ()
+(defun my-hook ()
   (hs-minor-mode 1) ;; Enables folding
             (projectile-rails-on)
             (ruby-refactor-mode-launch)

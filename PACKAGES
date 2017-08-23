@@ -7,7 +7,7 @@ align-cljlet
 anzu
 auto-complete
 autopair
-autopep8
+py-autopep8
 bash-completion
 better-defaults
 bfbuilder
