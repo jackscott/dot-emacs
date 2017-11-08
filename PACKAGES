@@ -96,7 +96,9 @@ smex
 sr-speedbar
 swiper-helm
 tangotango-theme
-terraform-mode
+terraform
+hcl
+protobuf
 thrift
 vagrant
 virtualenvwrapper

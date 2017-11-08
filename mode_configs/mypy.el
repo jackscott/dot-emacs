@@ -47,6 +47,8 @@
              ]
   :export [my-hook])
 
+(setq python-indent-offset 2)
+
 (add-to-list 'auto-mode-alist '("\\.py\\'\\|\\.wsgi\\'" . python-mode))
 
 (funcs/set-list-items '(py-force-py-shell-name-p
