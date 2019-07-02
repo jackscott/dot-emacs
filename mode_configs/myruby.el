@@ -17,7 +17,8 @@
            projectile
            projectile-rails
            ruby-refactor
-           rbenv])
+           rbenv
+           groovy-mode])
 
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
 
@@ -34,7 +35,7 @@
 ;; (add-to-list 'auto-mode-alist '("\\.ru$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Gemfile$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Vagrantfile$" . ruby-mode))
-
+(add-to-list 'auto-mode-alist '("Jenkinsfile$" . groovy-mode))
 ;; When folding, take these delimiters into consideration
 (add-to-list 'hs-special-modes-alist
              '(ruby-mode
@@ -69,15 +70,6 @@
 ;; when interacting with a debugger)
 
 (defun my-hook ()
-  (hs-minor-mode 1) ;; Enables folding
-  (projectile-rails-on)
-  (ruby-refactor-mode-launch)
-  (yard-mode)
-  (eldoc-mode)
-  (modify-syntax-entry ?: ".")
-  (inf-ruby-minor-mode)
-  (add-hook 'after-init-hook 'inf-ruby-switch-setup)
-  (global-rbenv-mode)
   (ruby-indent-tabs-mode nil))
 
 (add-hook 'ruby-mode-hook 'my-hook)
