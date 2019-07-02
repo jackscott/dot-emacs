@@ -6,7 +6,7 @@
 ;;
 ;;; Commentary:
 ;;
-;;  
+;;
 ;;
 ;;; Code:
 (eval-when-compile (require 'cl))
@@ -21,7 +21,7 @@
              helm-ag
              swiper
              swiper-helm])
-  
+
 (require 'anzu)
 (global-anzu-mode +1)
 (global-set-key (kbd "M-%") 'anzu-query-replace)
@@ -38,7 +38,8 @@
 (global-auto-complete-mode t)
 
 (setq ac-auto-start 3
-      ac-ignore-case 'smart)
+      ac-ignore-case 'smart
+      yas-snippet-revival nil)
 
 ;; Yasnippets
 

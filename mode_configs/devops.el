@@ -27,22 +27,25 @@
 (require 'namespaces)
 (namespace devops
   :import [funcs my-py]
-  :packages [mmm-mode
+  :packages [
              yaml-mode
-             salt-mode
+             ;salt-mode
              terraform-mode])
 
 
 (require 'yaml-mode)
 (setq yaml-indent-offset 2)
 
-(require 'salt-mode)
-(setq salt-mode-indent-level 2)
+;; (require 'salt-mode)
+;; (setq salt-mode-indent-level 2)
 
 (require 'terraform-mode)
+;; (require 'python-mode)
+;; (define-child-mode python-2-mode python-mode "Python 2 mode")
+;; (define-child-mode python-3-mode python-mode "Python 3 mode")
 
 (add-to-list 'auto-mode-alist
-             '("\\.yml\\'\\|.sls\\'\\|pillar\\.example\\'\\|\\.jinja\\'" . salt-mode))
+             '("\\.sls\\'\\|pillar\\.example\\'\\|\\.jinja\\'" . yaml-mode))
 
 
 (add-to-list 'auto-mode-alist

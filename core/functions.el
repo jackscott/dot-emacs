@@ -33,7 +33,7 @@
 	   :export [set-list-items toggle-bars
                              mychmod
                              myrefresh
-                             sr-speedbar
+                             ;;sr-speedbar
                              home-dir
                              emacs-dir
                              dot-dir
@@ -51,7 +51,7 @@
   (format "%s/.emacs.d/%s" (getenv "HOME") path))
 
 (defn dot-dir (pth)
-  (format "%s/snippets" *emacs-root*))
+  (format "%s" *emacs-root*))
 
 (defn toggle-bars ()
   (interactive)

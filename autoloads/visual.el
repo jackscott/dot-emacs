@@ -28,12 +28,7 @@
 (require 'namespaces)
 (namespace visual
 	   :use [cl]
-	   :import [ funcs ]
-	   :packages [sr-speedbar
-                      color-theme
-                      color-theme-approximate
-                      color-theme-solarized
-                      tangotango-theme])
+	   :import [funcs])
 
 (add-to-list 'custom-theme-load-path (dotdir+ "themes"))
 
@@ -70,7 +65,7 @@
 (menu-bar-mode -1)
 (blink-cursor-mode -1)
 
-(color-theme-initialize)
+;;(color-theme-initialize)
 (setq color-theme-is-global 0)
 
 
@@ -78,8 +73,9 @@
 ;; refactor this, grouping into categroies and changing the theme
 ;; category depending on the time of day.  maybe cycle themes every 20-30
 ;; mins, might get annoying
-(setq my-color-themes (list
-                       'color-theme-dark-laptop
+(setq my-color-themes '(list
+                        'color-theme-darktooth
+                        'color-theme-anti-zenburn-theme
                        'color-theme-ld-dark
                        'color-theme-calm-forest
                        'color-theme-gray30
@@ -141,4 +137,4 @@
 (global-set-key (kbd "M-<return>") 'toggle-fullscreen)
 ;;(color-theme-dark-laptop)
 ;;(toggle-fullscreen)
-;(sr-speedbar-open)
+

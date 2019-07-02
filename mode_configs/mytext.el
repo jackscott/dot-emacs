@@ -19,6 +19,8 @@
                                 "ENGLISH_WORD_REPEAT_RULE"
                                 ))
 
+(add-hook 'text-mode-hook 'turn-on-visual-line-mode)
+
 ;; (ispell-dictionary "en_US")
 ;; (ispell-local-dictionary-alist '("en_US"
 ;;                                  "[[:alpha:]]"))

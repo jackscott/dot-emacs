@@ -34,7 +34,9 @@
 (require 'namespaces)
 (namespace keys
   :import [funcs visual]
-  :packages [browse-at-remote])
+  :packages [
+                                        ;browse-at-remote
+             ])
 
 ;;(global-set-key (kbd "C-c ") 'browse-at-remote)
 

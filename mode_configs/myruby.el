@@ -5,18 +5,14 @@
            ruby-mode
            inf-ruby
            ruby-tools
-           ruby-block
-           ruby-additional
+           ;;ruby-block
            ruby-hash-syntax
-           ruby-refactor
            web-mode
            rvm
            feature-mode
            bundler
            rspec-mode
            projectile
-           projectile-rails
-           ruby-refactor
            rbenv
            groovy-mode])
 

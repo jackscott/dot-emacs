@@ -1,3 +1,7 @@
+;;;; package  ---- This is my init, there are many others out there but this one is mine
+;;;; Commentary:
+;;;;
+;;;; Code:
 (eval-when-compile (require 'cl))
 (setq debug-on-error t)
 
@@ -37,7 +41,7 @@
        (point-max))))
 
 ;; add in global site-lisp if it exists
-(let ((default-directory "/usr/local/share/emacs/site-lisp/"))
+(let ((default-directory "/usr/share/emacs/site-lisp/"))
   (if (file-directory-p default-directory)
       (normal-top-level-add-subdirs-to-load-path)))
 
@@ -54,7 +58,7 @@
 ;; emacs < 24 doesnt have packages functionality, load this in instead
 (if (< (string-to-number emacs-version) 24)
     (lexical-let ((f (emacsdir+ "package.el")))
-      
+
     (if (file-exists-p f)
         (load f)
       '(lambda ()
@@ -65,9 +69,9 @@
 
 (setq package-archives
       '(("melpa-stable" . "https://stable.melpa.org/packages/")
-        ("melpa" . "http://melpa.milkbox.net/packages/")
+        ;;("melpa" . "https://melpa.org/packages/")
         ;;("marmalade" . "https://marmalade-repo.org/packages/")
-        ;;("gnu" . "http://elpa.gnu.org/packages/")
+        ("gnu" . "http://elpa.gnu.org/packages/")
         ("org" . "http://orgmode.org/elpa/"))
       ;; setup a list of packages to install
       package-selected-packages '(split-string (slurp (dotdir+ "PACKAGES")) "\n" t)
@@ -89,7 +93,7 @@
  (lambda (dir)
    (dolist (word (files-in-below-directory (dotdir+ dir)))
      (load word)))
- '("mode_configs" "autoloads"))
+ '("mode_configs" "autoloads" "external"))
 
 
 ;;; I like to make Emacs a bitch to close (C-x C-c is sooo easy to hit):
@@ -106,6 +110,22 @@
                                   obsolete noruntime cl-functions
                                   interactive-only))
 
+
 ;; compile everything below *EMACS-ROOT* to help with startup next time around
 (let ((dir (file-name-directory (or load-file-name buffer-file-name))))
   (byte-recompile-directory dir))
+
+(require 'server)
+
+(defun my--server-start ()
+  "Custom function to start a named server."
+  (let ((server-num 0))
+    (while (server-running-p (unless (eq server-num 0) (concat "server" (number-to-string server-num))))
+      (setq server-num (+ server-num 1)))
+    (unless (eq server-num 0)
+      (setq server-name (concat "server" (number-to-string server-num))))
+    (server-start)
+    (setq frame-title-format server-name)))
+
+;;(my--server-start)
+;;; init.el ends here

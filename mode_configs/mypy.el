@@ -37,17 +37,26 @@
              virtualenvwrapper
              company-jedi
              nose
-             helm-pydoc
+             ;;helm-pydoc
              elpy
              subword
              linum
-						 jedi
-             ;autopair
-             ;flymake-python-pyflakes
+             jedi
+             autopair
+             flymake-python-pyflakes
              ]
   :export [my-hook])
 
-(setq python-indent-offset 2)
+(require 'python)
+(require 'jedi)
+(require 'py-autopep8)
+(require 'flycheck)
+(require 'elpy)
+
+(setq python-indent-offset 4)
+
+;; (define-child-mode python-2-mode python-mode "Python 2 mode")
+;; (define-child-mode python-3-mode python-mode "Python 3 mode")
 
 (add-to-list 'auto-mode-alist '("\\.py\\'\\|\\.wsgi\\'" . python-mode))
 
@@ -61,8 +70,8 @@
                       t)
 
 (setq py-load-python-mode-pymacs-p nil
-      py-indent-offset 2
-      default-tab-width 2
+      py-indent-offset 4
+      default-tab-width 4
       py-smart-indentation t
       indent-tabs-mode nil
       elpy-rpc-backend "jedi"
@@ -75,12 +84,8 @@
       jedi:get-in-function-call-delay 10000000
       projectile-switch-project-action 'venv-projectile-auto-workon)
 
-(require 'jedi)
-;;(require 'py-autopep8)
-(require 'flycheck)
-(require 'elpy)
-(python-shell-prompt-detect)
 
+(python-shell-prompt-detect)
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
 
@@ -127,8 +132,7 @@
   "Wrapper fn for required actions during elpy initialization."
 	(remove-hook 'elpy-modules 'elpy-module-flymake)
 	(add-hook 'elpy-mode-hook 'flycheck-mode)
-	(add-hook 'elpy-mode-hook 'elpy-use-ipython)
-	;;(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+	(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
 	(elpy-enable))
 
 (defun mypy-hook ()
@@ -140,7 +144,7 @@
   (setq-default tab-width 2)
   (delete-selection-mode t)
   (disable-paredit-mode)
-  
+
   (jedi:setup)
   (jedi:ac-setup)
   ;;(jedi-config:setup-server-args)
@@ -149,7 +153,7 @@
   (imenu-add-menubar-index)
 
   (flycheck-mode 1)
-  (semantic-mode 1)
+  ;(semantic-mode 1)
   (subword-mode 1)
   (setq flycheck-checker 'python-pylint
         flycheck-checker-error-threshold 900
@@ -168,7 +172,7 @@
   (setq py-python-command-args '("--matplotlib" "--colors" "LightBG")))
 
 ;; (setq ein:use-auto-complete t)
-;; (setq ein:use-auto-complete-superpack t)
+;; (setq ein:use-auto-pepcomplete-superpack t)
 ;; (setq ein:use-smartrep t))
 
 (defn nosetests-all-virtualenv ()
@@ -184,5 +188,3 @@
               (nose-find-project-root)
               "/")))))))
     (nosetests-all)))
-
-

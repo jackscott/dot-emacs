@@ -1,7 +1,12 @@
 (require 'namespaces)
 (namespace org
-  :packages [org s org-dropbox org-mac-iCal org-time-budgets])
+  :packages [org
+             s
+             ;;org-mac-iCal
+             org-time-budgets])
 
+;; see: https://lists.gnu.org/archive/html/emacs-orgmode/2015-01/msg00228.html
+(defalias 'calendar-absolute-from-iso 'calendar-iso-to-absolute)
 
 (add-to-list 'org-modules 'org-timer)
 
@@ -21,9 +26,9 @@
 
       (add-hook 'org-clock-out-hook
                 (lambda () (call-org-statusbar "out")))))
-    
+
 ; (add-hook 'org-clock-in-hook
-;;           (lambda () 
+;;           (lambda ()
 ;; (add-hook 'org-clock-out-hook
 ;;           (lambda ()
 ;;             (call-process "/usr/bin/osascript" nil 0 nil "-e" "tell application \"org-clock-statusbar\" to clock out")))
@@ -70,7 +75,7 @@
 (setq org-clock-auto-clock-resolution (quote when-no-clock-is-running))
 ;; Include current clocking task in clock reports
 (setq org-clock-report-include-clocking-task t)
-;; 
+;;
 (setq org-time-clocksum-use-fractional t)
 
 ;; format string used when creating CLOCKSUM lines and when generating a
@@ -84,7 +89,7 @@
        "Switch entry to DONE when all subentries are done, to TODO otherwise."
        (let (org-log-done org-log-states)   ; turn off logging
          (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
-     
+
 (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
 
 (defun my-org-clocktable-indent-string (level)
@@ -100,3 +105,22 @@
 (advice-add 'org-clocktable-indent-string
             :override
             #'my-org-clocktable-indent-string)
+
+(setq org-latex-listings t
+      org-src-fontify-natively t)
+
+(eval-after-load "ox-latex"
+
+  ;; update the list of LaTeX classes and associated header (encoding, etc.)
+  ;; and structure
+  '(add-to-list 'org-latex-classes
+                `("beamer"
+                  ,(concat "\\documentclass[presentation]{beamer}\n"
+                           "[DEFAULT-PACKAGES]"
+                           "[PACKAGES]"
+                           "[EXTRA]\n")
+                  ("\\section{%s}" . "\\section*{%s}")
+                  ("\\subsection{%s}" . "\\subsection*{%s}")
+                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))))
+
+;;; myorg.el ends here

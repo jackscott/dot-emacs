@@ -35,12 +35,12 @@
   :export []
   :packages [;;yasnippet
              ido
-             sr-speedbar
              bug-reference-github
              projectile
              rainbow-delimiters
              ;;company
              window-numbering
+             smartparens
              ;;helm-ag
              ;;swiper
              ;;swiper-helm
@@ -49,6 +49,7 @@
              paredit])
 
 ;;for some reason these dont work with :packages 
+(require 'smartparens)
 (require 'smartparens-config)
 
 (setq projectile-indexing-method 'native)
@@ -115,3 +116,5 @@
   (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
   (add-to-list 'interpreter-mode-alist '("lua" . lua-mode)))
 
+
+(add-hook 'before-save-hook 'delete-trailing-whitespace)

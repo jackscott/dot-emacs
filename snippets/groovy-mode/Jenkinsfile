@@ -1,0 +1,13 @@
+# key: jenkins-wrk
+# name: Jenkinsfile
+# --
+#!groovy
+// encoding: utf-8
+// Local Variables:
+// mode: groovy; fill-width: 100; comment-column: 90;
+// tab-width:2; indent-tabs-mode: nil; indent-offset:2;
+// End:
+// vim: ai ts=2 sts=2 et sw=2 ft=groovy
+// Author: Jack Scott <jscott@cylance.com>
+// Copyright © `(format-time-string "%Y")` Cylance, inc - All rights reserved.
+$1
