@@ -29,7 +29,7 @@
 
 (defun dotdir+ (path)
   "Return an absolute path to DOT-EMACS directory"
-  (let ((eroot (file-name-directory (or load-file-name buffer-file-name))))
+  (let (eroot (file-name-directory (or load-file-name buffer-file-name)))
     (expand-file-name (file-name-sans-versions path) eroot)))
 
 (defun slurp (f)
