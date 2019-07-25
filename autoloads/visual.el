@@ -76,20 +76,20 @@
 (setq my-color-themes '(list
                         'color-theme-darktooth
                         'color-theme-anti-zenburn-theme
-                       'color-theme-ld-dark
-                       'color-theme-calm-forest
-                       'color-theme-gray30
-                       'color-theme-jsc-dark
-                       'color-theme-sitaramv-solaris
-                       'color-theme-resolve
-                       'color-theme-classic
-                       'color-theme-jonadabian-slate
-                       'color-theme-kingsajz
-                       'color-theme-shaman
-                       'color-theme-subtle-blue
-                       'color-theme-snowish
-                       'color-theme-sitaramv-nt
-                       'color-theme-wheat))
+                        'color-theme-ld-dark
+                        'color-theme-calm-forest
+                        'color-theme-gray30
+                        'color-theme-jsc-dark
+                        'color-theme-sitaramv-solaris
+                        'color-theme-resolve
+                        'color-theme-classic
+                        'color-theme-jonadabian-slate
+                        'color-theme-kingsajz
+                        'color-theme-shaman
+                        'color-theme-subtle-blue
+                        'color-theme-snowish
+                        'color-theme-sitaramv-nt
+                        'color-theme-wheat))
 
 (setq theme-current my-color-themes)
 (my-theme-set-default)
@@ -137,4 +137,3 @@
 (global-set-key (kbd "M-<return>") 'toggle-fullscreen)
 ;;(color-theme-dark-laptop)
 ;;(toggle-fullscreen)
-
