@@ -19,8 +19,9 @@
   :packages [yasnippet
              anzu
              helm-ag
-             swiper
-             swiper-helm])
+             ;;swiper
+             ;;swiper-helm
+             ])
 
 (require 'anzu)
 (global-anzu-mode +1)
