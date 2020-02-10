@@ -29,8 +29,9 @@
 
 (defun dotdir+ (path)
   "Return an absolute path to DOT-EMACS directory"
-  (let (eroot (file-name-directory (or load-file-name buffer-file-name)))
-    (expand-file-name (file-name-sans-versions path) eroot)))
+  (expand-file-name (file-name-sans-versions path) *emacs-root*))
+
+    
 
 (defun slurp (f)
   ""
@@ -84,7 +85,7 @@
 (setq ;; activate path monkey-patching
       exec-path-from-shell t )
 ;; load in additional elisp libraries from local dirs
-(dolist (e '("external/troels" "core/functions"))
+(dolist (e '("external/namespaces" "external/troels" "core/functions" ))
   (load (dotdir+ e)))
 
 
