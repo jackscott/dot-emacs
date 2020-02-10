@@ -33,11 +33,9 @@
              flycheck
              pylint
              py-autopep8
-             python-pylint
              virtualenvwrapper
              company-jedi
              nose
-             ;;helm-pydoc
              elpy
              subword
              linum
@@ -54,9 +52,6 @@
 (require 'elpy)
 
 (setq python-indent-offset 4)
-
-;; (define-child-mode python-2-mode python-mode "Python 2 mode")
-;; (define-child-mode python-3-mode python-mode "Python 3 mode")
 
 (add-to-list 'auto-mode-alist '("\\.py\\'\\|\\.wsgi\\'" . python-mode))
 
@@ -147,13 +142,11 @@
 
   (jedi:setup)
   (jedi:ac-setup)
-  ;;(jedi-config:setup-server-args)
   (electric-pair-mode 1)
   (flyspell-prog-mode)
   (imenu-add-menubar-index)
 
   (flycheck-mode 1)
-  ;(semantic-mode 1)
   (subword-mode 1)
   (setq flycheck-checker 'python-pylint
         flycheck-checker-error-threshold 900
