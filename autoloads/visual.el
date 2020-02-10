@@ -74,6 +74,7 @@
 ;; category depending on the time of day.  maybe cycle themes every 20-30
 ;; mins, might get annoying
 (setq my-color-themes '(list
+                        'color-theme-dark-laptop
                         'color-theme-darktooth
                         'color-theme-anti-zenburn-theme
                         'color-theme-ld-dark
