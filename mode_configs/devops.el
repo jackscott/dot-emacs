@@ -20,7 +20,7 @@
 
 ;;; Commentary:
 
-;; 
+;;
 
 ;;; Code:
 (provide 'devops)
@@ -40,9 +40,6 @@
 ;; (setq salt-mode-indent-level 2)
 
 (require 'terraform-mode)
-;; (require 'python-mode)
-;; (define-child-mode python-2-mode python-mode "Python 2 mode")
-;; (define-child-mode python-3-mode python-mode "Python 3 mode")
 
 (add-to-list 'auto-mode-alist
              '("\\.sls\\'\\|pillar\\.example\\'\\|\\.jinja\\'" . yaml-mode))

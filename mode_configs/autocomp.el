@@ -48,8 +48,8 @@
       (list (funcs/dot-dir "snippets")
             (funcs/emacs-dir "snippets")))
 (require 'yasnippet)
-(yas-global-mode 1)
-(yas-reload-all)
+;(yas-global-mode nil)
+;;(yas-reload-all)
 
 ;; I like uniquify but not vanilla
 (setq uniquify-buffer-name-style 'forward

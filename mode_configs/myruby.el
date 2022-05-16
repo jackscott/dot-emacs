@@ -1,7 +1,7 @@
 (namespace ruby
   :packages [
            yard-mode ;; fontification in ruby comments
-           goto-gem ;; Open dired in a gem directory
+           ;;goto-gem ;; Open dired in a gem directory
            ruby-mode
            inf-ruby
            ruby-tools
