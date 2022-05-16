@@ -30,6 +30,7 @@
 	   :use [cl]
 	   :import [funcs])
 
+
 (add-to-list 'custom-theme-load-path (dotdir+ "themes"))
 
 (defun my-theme-set-default ()
@@ -65,35 +66,36 @@
 (menu-bar-mode -1)
 (blink-cursor-mode -1)
 
-;;(color-theme-initialize)
-(setq color-theme-is-global 0)
+;; (require 'color-theme)
+;; (color-theme-initialize)
+;; (setq color-theme-is-global 1)
 
 
-;;; TODO
-;; refactor this, grouping into categroies and changing the theme
-;; category depending on the time of day.  maybe cycle themes every 20-30
-;; mins, might get annoying
-(setq my-color-themes '(list
-                        'color-theme-dark-laptop
-                        'color-theme-darktooth
-                        'color-theme-anti-zenburn-theme
-                        'color-theme-ld-dark
-                        'color-theme-calm-forest
-                        'color-theme-gray30
-                        'color-theme-jsc-dark
-                        'color-theme-sitaramv-solaris
-                        'color-theme-resolve
-                        'color-theme-classic
-                        'color-theme-jonadabian-slate
-                        'color-theme-kingsajz
-                        'color-theme-shaman
-                        'color-theme-subtle-blue
-                        'color-theme-snowish
-                        'color-theme-sitaramv-nt
-                        'color-theme-wheat))
+;; ;;; TODO
+;; ;; refactor this, grouping into categroies and changing the theme
+;; ;; category depending on the time of day.  maybe cycle themes every 20-30
+;; ;; mins, might get annoying
+;; (setq my-color-themes '(list
+;;                         'color-theme-dark-laptop
+;;                         'color-theme-darktooth
+;;                         'color-theme-anti-zenburn-theme
+;;                         'color-theme-ld-dark
+;;                         'color-theme-calm-forest
+;;                         'color-theme-gray30
+;;                         'color-theme-jsc-dark
+;;                         'color-theme-sitaramv-solaris
+;;                         'color-theme-resolve
+;;                         'color-theme-classic
+;;                         'color-theme-jonadabian-slate
+;;                         'color-theme-kingsajz
+;;                         'color-theme-shaman
+;;                         'color-theme-subtle-blue
+;;                         'color-theme-snowish
+;;                         'color-theme-sitaramv-nt
+;;                         'color-theme-wheat))
 
-(setq theme-current my-color-themes)
-(my-theme-set-default)
+;; (setq theme-current my-color-themes)
+;; (my-theme-set-default)
 
 (setf pop-up-windows nil        ; Don't change my windowconfiguration.
       european-calendar-style t         ; Use european date format.
@@ -133,7 +135,7 @@
                         :family "Inconsolata" :height 215 :weight 'normal))
 
 
-;; cycle through color themes
+;; Cycle through color themes
 (global-set-key [f12] 'my-theme-cycle)
 (global-set-key (kbd "M-<return>") 'toggle-fullscreen)
 ;;(color-theme-dark-laptop)
