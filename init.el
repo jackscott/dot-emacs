@@ -31,7 +31,7 @@
   "Return an absolute path to DOT-EMACS directory"
   (expand-file-name (file-name-sans-versions path) *emacs-root*))
 
-    
+
 
 (defun slurp (f)
   ""
@@ -51,10 +51,6 @@
     (add-to-list 'load-path pathdir))
  '((emacsdir+ "elpa") *emacs-root* (dotdir+ "external")))
 
-;;(require 'exec-path-from-shell)
-;; emacs on OSX has always been lame, luckily Steve Purcell solved this years ago.
-;;(when (memq window-system '(mac ns x))
-;;  (exec-path-from-shell-initialize))
 
 ;; emacs < 24 doesnt have packages functionality, load this in instead
 (if (< (string-to-number emacs-version) 24)
@@ -70,20 +66,18 @@
 
 (setq package-archives
       '(("melpa-stable" . "https://stable.melpa.org/packages/")
-        ;;("melpa" . "https://melpa.org/packages/")
+        ("melpa" . "https://melpa.org/packages/")
         ;;("marmalade" . "https://marmalade-repo.org/packages/")
         ("gnu" . "http://elpa.gnu.org/packages/")
         ("org" . "http://orgmode.org/elpa/"))
-      ;; setup a list of packages to install
-      package-selected-packages '(split-string (slurp (dotdir+ "PACKAGES")) "\n" t)
       )
+      ;; setup a list of packages to install
+      ;;package-selected-packages '(split-string (slurp (dotdir+ "PACKAGES")) "\n" t)
 
 (package-initialize)
 (package-refresh-contents)
 (package-install-selected-packages)
 
-(setq ;; activate path monkey-patching
-      exec-path-from-shell t )
 ;; load in additional elisp libraries from local dirs
 (dolist (e '("external/namespaces" "external/troels" "core/functions" ))
   (load (dotdir+ e)))
