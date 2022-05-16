@@ -31,11 +31,11 @@
            autocomp]
   :packages [python
              flycheck
-             pylint
+             ;;pylint
              py-autopep8
              virtualenvwrapper
-             company-jedi
-             nose
+             ;;company-jedi
+             ;;nose
              elpy
              subword
              linum
@@ -70,6 +70,7 @@
       py-smart-indentation t
       indent-tabs-mode nil
       elpy-rpc-backend "jedi"
+      elpy-rpc-python-command "python3.8"
       python-shell-unbuffered nil
       python-shell-prompt-detect-failure-warning nil
       python-shell-prompt-detect-enabled nil)
@@ -77,17 +78,18 @@
 (setq jedi:setup-keys t
       jedi:complete-on-dot t
       jedi:get-in-function-call-delay 10000000
-      projectile-switch-project-action 'venv-projectile-auto-workon)
+      ;;projectile-switch-project-action 'venv-projectile-auto-workon
+      )
 
 
-(python-shell-prompt-detect)
+;;(python-shell-prompt-detect)
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
 
 
 (defvar jedi-config:vcs-root-sentinel ".git")
 (defvar jedi-config:python-module-sentinel "__init__.py")
-(defvar jedi-config:with-virtualenv nil
+(defvar jedi-config:with-virtualenv (emacsdir+ ".python-environments/default")
   "Set to non-nil to point to a particular virtualenv.")
 
 (defun get-project-root (buf repo-type init-file)
@@ -120,20 +122,23 @@
                 "--virtual-env"
                 jedi-config:with-virtualenv))))
 
-(defvar jedi-config:use-system-python nil)
-
+;;(defvar jedi-config:use-system-python nil)
+(setq flycheck-python-flake8-executable "flake8")
 
 (defun elpy-hook ()
   "Wrapper fn for required actions during elpy initialization."
 	(remove-hook 'elpy-modules 'elpy-module-flymake)
 	(add-hook 'elpy-mode-hook 'flycheck-mode)
-	(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+;;	(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+    ;; (add-hook 'elpy-mode-hook (lambda ()
+    ;;                             (add-hook 'before-save-hook
+    ;;                                       'elpy-black-fix-code nil t)))
 	(elpy-enable))
 
 (defun mypy-hook ()
   "Python hook, does all of the heavy lifting of initializing python environment."
-  (set (make-local-variable 'company-backends)
-       '(company-jedi))
+  ;; (set (make-local-variable 'company-backends)
+  ;;      '(company-jedi))
 	(elpy-hook)
   (setq-default indent-tabs-mode nil)
   (setq-default tab-width 2)
@@ -168,16 +173,16 @@
 ;; (setq ein:use-auto-pepcomplete-superpack t)
 ;; (setq ein:use-smartrep t))
 
-(defn nosetests-all-virtualenv ()
-  (interactive)
-  (let ((nose-global-name
-         (format
-          "~/.virtualenvs/%s/bin/nosetests"
-          (car
-           (last
-            (delete
-             ""
-             (split-string
-              (nose-find-project-root)
-              "/")))))))
-    (nosetests-all)))
+;; (defn nosetests-all-virtualenv ()
+;;   (interactive)
+;;   (let ((nose-global-name
+;;          (format
+;;           "~/.virtualenvs/%s/bin/nosetests"
+;;           (car
+;;            (last
+;;             (delete
+;;              ""
+;;              (split-string
+;;               (nose-find-project-root)
+;;               "/")))))))
+;;     (nosetests-all)))
