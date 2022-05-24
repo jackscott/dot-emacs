@@ -37,8 +37,8 @@ flycheck-clojure
 flycheck-color-mode-line
 flycheck-cython
 fullframe
+go-mode
 gist
-goto-gem
 groovy-mode
 helm
 helm-ag
@@ -71,7 +71,6 @@ pcache
 projectile
 projectile-rails
 pyenv-mode-auto
-pylint
 python-pep8
 python-pylint
 rainbow-delimiters
@@ -90,6 +89,9 @@ smex
 sr-speedbar
 swiper-helm
 terraform
+use-packages
+lsp-mode
+lsp-ui
 hcl
 protobuf
 thrift
