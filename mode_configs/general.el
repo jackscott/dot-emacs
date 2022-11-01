@@ -48,7 +48,7 @@
              yaml-mode
              paredit])
 
-;;for some reason these dont work with :packages 
+;;for some reason these dont work with :packages
 (require 'smartparens)
 (require 'smartparens-config)
 
@@ -99,15 +99,15 @@
 (setq auto-mode-alist (cons '("\\.bash\\'\\|\\.sh\\'" . bash-mode) auto-mode-alist))
 
 ;;Taken from the default .emacs file on a gentoo-system
-;; Copyright Gentoo Foundation 
+;; Copyright Gentoo Foundation
 ;;ebuild-mode settings
 (defun ebuild-mode ()
   (shell-script-mode)
-  ;;(sh-set-shell "bash") 
+  ;;(sh-set-shell "bash")
   (make-local-variable 'tab-width)
   (setq tab-width 4))
 
-(setq auto-mode-alist (cons '("\\.ebuild\\'" . ebuild-mode) auto-mode-alist)) 
+(setq auto-mode-alist (cons '("\\.ebuild\\'" . ebuild-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.eclass\\'" . ebuild-mode) auto-mode-alist))
 
 ;; LUA
@@ -118,3 +118,17 @@
 
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+;; (setq custom-tab-width 2)
+;; (setq-default evil-shift-width custom-tab-width)
+;; (setq-default electric-indent-inhibit t)
+
+;; (global-whitespace-mode)
+;; (setq whitespace-style '(face tabs tab-mark trailing))
+;; (custom-set-faces
+;;  '(whitespace-tab ((t (:foreground "#636363")))))
+
+;; (setq whitespace-display-mappings
+;;       '((tab-mark 9 [124 9] [92 9])))
+
+;;(setq backward-delete-char-untabify-method 'hungry)
